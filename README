@@ -1,0 +1,7 @@
+Kaitai CAD formats written by Michal Josef Špaček
+
+For his CAD::Format::DWG perl modules. See metacpan.
+
+See https://github.com/kaitai-io/kaitai_struct_webide/wiki/Features
+for local usage with DWG reverse-engineering.
+Install the webide locally.
