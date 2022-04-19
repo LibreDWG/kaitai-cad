@@ -1,5 +1,5 @@
 meta:
-  id: dwg_ac1_50
+  id: dwg_ac150
   title: AutoCAD r2.0 drawing (AC1.50)
   application: AutoCAD
   file-extension:
@@ -714,11 +714,8 @@ types:
         type: u1
         if: entity_common.flag2_2
         # 1, 2 nebo 7?
-      - id: align_pt.x
-        type: f8
-        if: entity_common.flag2_1
-      - id: align_pt.y
-        type: f8
+      - id: align_pt
+        type: point_2d
         if: entity_common.flag2_1
   entity_block_begin:
     seq:
