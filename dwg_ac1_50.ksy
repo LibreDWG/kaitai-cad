@@ -1,5 +1,5 @@
 meta:
-  id: dwg_ac150
+  id: dwg_ac1_50
   title: AutoCAD r2.0 drawing (AC1.50)
   application: AutoCAD
   file-extension:
@@ -130,8 +130,8 @@ types:
       - id: variables
         type: header_variables
     instances:
-      blocks_size_unknown:
-        value: (blocks_size_raw & 0xff000000) >> 24
+      #blocks_size_unknown:
+      #  value: (blocks_size_raw & 0xff000000) >> 24
       blocks_size:
         value: (blocks_size_raw & 0x00ffffff)
   table:
