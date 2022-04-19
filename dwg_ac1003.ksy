@@ -133,9 +133,9 @@ types:
         type: header_variables
     instances:
       blocks_size_unknown:
-         value: (blocks_size_raw & 0xff000000) >> 24
+        value: (blocks_size_raw & 0xff000000) >> 24
       blocks_size:
-         value: (blocks_size_raw & 0x00ffffff)
+        value: (blocks_size_raw & 0x00ffffff)
   table:
     seq:
       - id: item_size
@@ -618,7 +618,7 @@ types:
             'entities::attrib': entity_attrib
             'entities::block_begin': entity_block_begin
             'entities::block_end': entity_block_end
-            'entities::insert' : entity_insert
+            'entities::insert': entity_insert
             'entities::circle': entity_circle
             'entities::dim': entity_dim
             'entities::face3d': entity_face3d

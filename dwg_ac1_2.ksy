@@ -106,7 +106,7 @@ types:
             'entities::arc': entity_arc
             'entities::block_begin': entity_block_begin
             'entities::block_end': entity_block_end
-            'entities::block_insert' : entity_block_insert
+            'entities::block_insert': entity_block_insert
             'entities::circle': entity_circle
             'entities::line': entity_line
             'entities::load': entity_load
@@ -118,7 +118,7 @@ types:
             'entities::text': entity_text
             'entities::trace': entity_trace
             'entities::tmp_arc': entity_arc
-            'entities::tmp_block_insert' : entity_block_insert
+            'entities::tmp_block_insert': entity_block_insert
             'entities::tmp_circle': entity_circle
             'entities::tmp_line': entity_line
             'entities::tmp_point': entity_point

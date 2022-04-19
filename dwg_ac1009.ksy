@@ -219,9 +219,9 @@ types:
         type: header_variables
     instances:
       #blocks_size_unknown:
-      #   value: (blocks_offset & 0xff000000) >> 24
+      #  value: (blocks_offset & 0xff000000) >> 24
       blocks_size:
-         value: (blocks_offset & 0x00ffffff)
+        value: (blocks_offset & 0x00ffffff)
   table:
     seq:
       - id: size
@@ -937,7 +937,7 @@ types:
             'entities::attdef': entity_attdef
             'entities::block_begin': entity_block_begin
             'entities::block_end': entity_block_end
-            'entities::insert' : entity_insert
+            'entities::insert': entity_insert
             'entities::circle': entity_circle
             'entities::dim': entity_dim
             'entities::face3d': entity_face3d
@@ -1179,10 +1179,10 @@ types:
       - id: default_text_position
         type: point_2d
         doc: DIMENSION/11|21
-#      - id: default_text_position_z
-#        type: f8
-#        if: entity_common.entity_mode.entity_elevation_flag == false
-#        doc: DIMENSION/31
+      #- id: default_text_position_z
+      #  type: f8
+      #  if: entity_common.entity_mode.entity_elevation_flag == false
+      #  doc: DIMENSION/31
       - id: unknown1
         type: u1
         if: entity_common.flag2_7
@@ -1200,7 +1200,9 @@ types:
         doc: DIMENSION/13|23
       - id: extension_defining_point1_z
         type: f8
-        if: entity_common.entity_mode.entity_elevation_flag == false and entity_common.flag2_5
+        if: |
+          entity_common.entity_mode.entity_elevation_flag == false
+          and entity_common.flag2_5
         doc: DIMENSION/33
       - id: extension_defining_point2
         type: point_2d
@@ -1208,7 +1210,9 @@ types:
         doc: DIMENSION/14|24
       - id: extension_defining_point2_z
         type: f8
-        if: entity_common.entity_mode.entity_elevation_flag == false and entity_common.flag2_4
+        if: |
+          entity_common.entity_mode.entity_elevation_flag == false
+          and entity_common.flag2_4
         doc: DIMENSION/34
       - id: defining_point
         type: point_2d
@@ -1216,20 +1220,26 @@ types:
         doc: DIMENSION/15|25
       - id: defining_point_z
         type: f8
-        if: entity_common.entity_mode.entity_elevation_flag == false and entity_common.flag2_3
+        if: |
+          entity_common.entity_mode.entity_elevation_flag == false
+          and entity_common.flag2_3
         doc: DIMENSION/35
       - id: dimension_line_arc_definition_point
         type: point_2d
         if: entity_common.flag2_2
       - id: dimension_line_arc_definition_point_z
         type: f8
-        if: entity_common.entity_mode.entity_elevation_flag == false and entity_common.flag2_2
+        if: |
+          entity_common.entity_mode.entity_elevation_flag == false
+          and entity_common.flag2_2
       - id: unknown2
         type: point_2d
         if: entity_common.flag2_1
       - id: unknown2_z
         type: f8
-        if: entity_common.entity_mode.entity_elevation_flag == false and entity_common.flag2_1
+        if: |
+          entity_common.entity_mode.entity_elevation_flag == false
+          and entity_common.flag2_1
       - id: rotation_in_radians
         type: f8
         if: entity_common.flag3_8
