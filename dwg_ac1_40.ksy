@@ -21,6 +21,7 @@ seq:
     type: entity
     repeat: expr
     repeat-expr: header.num_entities
+  # 13c layers? [43 5c 5e 02 00 63 2b 00 00 00 00 00 00]
 types:
   header:
     seq:
@@ -54,7 +55,7 @@ types:
         doc: 0x0080-0x0098, $VIEWCTRL/10|20|30
       - id: view_size
         type: f8
-	doc: $VIEWSIZE/40
+        doc: $VIEWSIZE/40
       - id: snap_mode
         type: s2
         doc: 0x009a-0x009b: $SNAPMODE/70
@@ -78,10 +79,10 @@ types:
         doc: 0x00b2-0x00b3, $FILLMODE
       - id: text_size
         type: f8
-	doc: $TEXTSIZE
+        doc: $TEXTSIZE
       - id: trace_width
         type: f8
-	doc: $TRACEWID
+        doc: $TRACEWID
       - id: current_layer
         type: s2
         doc: 0x00c4-0x00c5
@@ -192,7 +193,7 @@ types:
         type: s2
       - id: size
         type: s2
-      - id: value
+      - id: name
         size: size
       - id: x
         type: f8
