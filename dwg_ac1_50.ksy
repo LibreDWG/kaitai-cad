@@ -88,7 +88,9 @@ types:
   header:
     seq:
       - id: magic
-        contents: [0x41, 0x43, 0x31, 0x2e, 0x35, 0x30]
+        contents: AC1.50
+        # [0x41, 0x43, 0x31, 0x2e, 0x35, 0x30]
+        # encoding: ASCII
         doc: 0x0000-0x0005, $ACADVER "AC1.50"
       - id: zeros
         size: 6

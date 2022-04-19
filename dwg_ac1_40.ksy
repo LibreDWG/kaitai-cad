@@ -26,7 +26,8 @@ types:
   header:
     seq:
       - id: magic
-        contents: [0x41, 0x43, 0x31, 0x2e, 0x34, 0x30]
+        contents: AC1.40
+        # [0x41, 0x43, 0x31, 0x2e, 0x34, 0x30]
         doc: 0x0000-0x0005, $ACADVER "AC1.40"
       - id: zeros
         size: 6
@@ -35,6 +36,7 @@ types:
         doc: 0x000c-0x0023; $INSBASE/10|20|30
       - id: num_bytes
         type: s4
+        doc: address after entities
       - id: num_entities
         type: s2
         doc: 0x0028-0x0029
@@ -194,7 +196,9 @@ types:
       - id: size
         type: s2
       - id: name
+        type: str
         size: size
+        encoding: ASCII
       - id: x
         type: f8
       - id: y
