@@ -232,7 +232,7 @@ types:
       - id: trace_width
         type: f8
         doc: 0x0142-0x0149, $TRACEWID
-      - id: current_layer_index
+      - id: celayer
         type: s2
         doc: 0x014a-0x014b, $CLAYER
       - id: current_color_convert
