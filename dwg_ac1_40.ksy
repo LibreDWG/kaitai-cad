@@ -1,5 +1,5 @@
 meta:
-  id: dwg_0140
+  id: dwg_ac1_40
   title: AutoCAD r1.40 drawing (AC1.40)
   application: AutoCAD
   file-extension:
@@ -20,61 +20,68 @@ seq:
   - id: entities
     type: entity
     repeat: expr
-    repeat-expr: header.number_of_entities
+    repeat-expr: header.num_entities
 types:
   header:
     seq:
       - id: magic
         contents: [0x41, 0x43, 0x31, 0x2e, 0x34, 0x30]
+        doc: 0x0000-0x0005, $ACADVER "AC1.40"
       - id: zeros
         size: 6
       - id: insertion_base
         type: point_3d
-        doc: 0x000c-0x0023
-      - id: number_of_bytes
+        doc: 0x000c-0x0023; $INSBASE/10|20|30
+      - id: num_bytes
         type: s4
-      - id: number_of_entities
+      - id: num_entities
         type: s2
         doc: 0x0028-0x0029
-      - id: drawing_first
+      - id: extmin
         type: point_3d
-      - id: drawing_second
+        doc: 0x0078-0x008f, $EXTMIN/10|20|30
+      - id: extmax
         type: point_3d
+        doc: 0x0090-0x00a7, $EXTMAX/10|20|30
       - id: limits_min
         type: point_2d
-        doc: 0x005a-0x0069
+        doc: 0x005a-0x0069, $LIMMIN/10|20
       - id: limits_max
         type: point_2d
-        doc: 0x006a-0x0079
+        doc: 0x006a-0x0079, $LIMMAX/10|20
       - id: view_ctrl
         type: point_3d
+        doc: 0x0080-0x0098, $VIEWCTRL/10|20|30
       - id: view_size
         type: f8
-      - id: snap
+	doc: $VIEWSIZE/40
+      - id: snap_mode
         type: s2
-        doc: 0x009a-0x009b
+        doc: 0x009a-0x009b: $SNAPMODE/70
       - id: snap_resolution
         type: f8
-        doc: 0x009c-0x00a3
-      - id: grid
+        doc: 0x009c-0x00a3, $SNAPUNIT/10|20
+      - id: grid_mode
         type: s2
-        doc: 0x00a4-0x00a5
+        doc: 0x00a4-0x00a5, $SNAPBASE/10|20
       - id: grid_unit
         type: f8
-        doc: 0x00a6-0x00ad
-      - id: ortho
+        doc: 0x00a6-0x00ad, $GRIDUNIT/10|20
+      - id: ortho_mode
         type: s2
-        doc: 0x00ae-0x00af
-      - id: regen
+        doc: 0x00ae-0x00af, $ORTHOMODE
+      - id: regen_mode
         type: s2
-        doc: 0x00b0-0x00b1 (XXX could be ffff)
-      - id: fill
+        doc: 0x00b0-0x00b1, $REGENMODE
+      - id: fill_mode
         type: s2
-        doc: 0x00b2-0x00b3 (XXX could be ffff)
+        doc: 0x00b2-0x00b3, $FILLMODE
       - id: text_size
         type: f8
+	doc: $TEXTSIZE
       - id: trace_width
         type: f8
+	doc: $TRACEWID
       - id: current_layer
         type: s2
         doc: 0x00c4-0x00c5
@@ -105,7 +112,7 @@ types:
       - id: dim_text_outside_of_dimension
         type: s2
         doc: 0x01de-0x01df
-      - id: axis
+      - id: axis_mode
         type: s2
         doc: 0x01e0-0x01e1
       - id: axis_value

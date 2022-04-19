@@ -1,5 +1,5 @@
 meta:
-  id: dwg_0120
+  id: dwg_ac1_2
   title: AutoCAD r1.2 drawing (AC1.2)
   application: AutoCAD
   file-extension:
@@ -26,6 +26,7 @@ types:
     seq:
       - id: magic
         contents: [0x41, 0x43, 0x31, 0x2e, 0x32, 0x00]
+        doc: 0x0000-0x0005, $ACADVER "AC1.2"
       - id: zeros
         size: 6
       - id: insertion_base
@@ -50,25 +51,25 @@ types:
         type: point_3d
       - id: view_size
         type: f8
-      - id: snap
+      - id: snap_mode
         type: s2
         doc: 0x009a-0x009b
       - id: snap_resolution
         type: f8
         doc: 0x009c-0x00a3
-      - id: grid
+      - id: grid_mode
         type: s2
         doc: 0x00a4-0x00a5
       - id: grid_unit
         type: f8
         doc: 0x00a6-0x00ad
-      - id: ortho
+      - id: ortho_mode
         type: s2
         doc: 0x00ae-0x00af
-      - id: regen
+      - id: regen_mode
         type: s2
         doc: 0x00b0-0x00b1 (XXX could be ffff)
-      - id: fill
+      - id: fill_mode
         type: s2
         doc: 0x00b2-0x00b3 (XXX could be ffff)
       - id: text_size

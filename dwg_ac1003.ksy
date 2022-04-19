@@ -171,7 +171,7 @@ types:
       - id: view_size
         type: f8
         doc: 0x00e0-0x00e7, $VIEWSIZE/40
-      - id: snap
+      - id: snap_mode
         type: s2
         doc: 0x00e8-0x00e9, $SNAPMODE/70
       - id: snap_resolution
@@ -190,25 +190,25 @@ types:
         type: s2
         enum: iso_plane
         doc: 0x0114-0x0115, $SNAPISOPAIR
-      - id: grid
+      - id: grid_mode
         type: s2
         doc: 0x0116-0x0117, $GRIDMODE
       - id: grid_unit
         type: point_2d
         doc: 0x0118-0x0127, $GRIDUNIT/10|20
-      - id: ortho
+      - id: ortho_mode
         type: s2
         doc: 0x0128-0x0129, $ORTHOMODE
-      - id: regen
+      - id: regen_mode
         type: s2
         doc: 0x012a-0x012b, $REGENMODE
-      - id: fill
+      - id: fill_mode
         type: s2
         doc: 0x012c-0x012d, $FILLMODE
-      - id: qtext
+      - id: qtext_mode
         type: s2
         doc: 0x012e-0x012f, $QTEXTMODE
-      - id: drag
+      - id: drag_mode
         type: s2
         doc: 0x0130-0x0131, $DRAGMODE
       - id: linetype_scale
@@ -270,13 +270,13 @@ types:
       - id: text_style_index
         type: s2
         doc: 0x018e-0x018f, $TEXTSTYLE (index)
-      - id: osnap
+      - id: osnap_mode
         enum: osnap_modes
         type: s2
         doc: 0x0190-0x0191, $OSMODE
-      - id: attributes
+      - id: att_mode
         enum: attributes
-        type: s2
+        type: u2
         doc: 0x0192-0x0193, $ATTMODE
       - id: menu
         size: 15

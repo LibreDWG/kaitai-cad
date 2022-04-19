@@ -1,6 +1,6 @@
 meta:
   id: dwg_ac1_50
-  title: AutoCAD r1.50 drawing (AC1.50)
+  title: AutoCAD r2.0 drawing (AC1.50)
   application: AutoCAD
   file-extension:
     - dwg
@@ -89,7 +89,7 @@ types:
     seq:
       - id: magic
         contents: [0x41, 0x43, 0x31, 0x2e, 0x35, 0x30]
-        doc: 0x0000-0x0005, $ACADVER
+        doc: 0x0000-0x0005, $ACADVER "AC1.50"
       - id: zeros
         size: 6
       - id: zero_one_or_three
@@ -151,10 +151,10 @@ types:
       - id: num_entities
         type: u2
         doc: 0x0076-0x0077
-      - id: drawing_first
+      - id: extmin
         type: point_3d
         doc: 0x0078-0x008f, $EXTMIN/10|20|30
-      - id: drawing_second
+      - id: extmax
         type: point_3d
         doc: 0x0090-0x00a7, $EXTMAX/10|20|30
       - id: limits_min
@@ -169,7 +169,7 @@ types:
       - id: view_size
         type: f8
         doc: 0x00e0-0x00e7, $VIEWSIZE/40
-      - id: snap
+      - id: snap_mode
         type: s2
         doc: 0x00e8-0x00e9, $SNAPMODE
       - id: snap_resolution
@@ -188,25 +188,25 @@ types:
         type: s2
         enum: iso_plane
         doc: 0x0114-0x0115, $SNAPISOPAIR
-      - id: grid
+      - id: grid_mode
         type: s2
         doc: 0x0116-0x0117, $GRIDMODE
       - id: grid_unit
         type: point_2d
         doc: 0x0118-0x0127, $GRIDUNIT/10|20
-      - id: ortho
+      - id: ortho_mode
         type: s2
         doc: 0x0128-0x0129, $ORTHOMODE
-      - id: regen
+      - id: regen_mode
         type: s2
         doc: 0x012a-0x012b, $REGENMODE
-      - id: fill
+      - id: fill_mode
         type: s2
         doc: 0x012c-0x012d, $FILLMODE
-      - id: qtext
+      - id: qtext_mode
         type: s2
         doc: 0x012e-0x012f, $QTEXTMODE
-      - id: drag
+      - id: drag_mode
         type: s2
         doc: 0x0130-0x0131, $DRAGMODE
       - id: linetype_scale
@@ -218,22 +218,25 @@ types:
       - id: trace_width
         type: f8
         doc: 0x0142-0x0149, $TRACEWID
-      - id: current_layer_index
+      - id: celayer
         type: s2
         doc: 0x014a-0x014b, $CLAYER
-      - id: current_color_convert
+      - id: cecolor_lo
+        type: s4
+        doc: 0x014c-0x014f, $CECOLOR (2, 3, 8, 15 - default)
+      - id: cecolor_hi
+        type: s4
+        doc: 0x0150-0x0153, $CECOLOR (0)
+      - id: unknown5
         type: s2
-        doc: 0x014c-0x014d, (2, 3, 8, 15 - default)
+        doc: 0x0154-0x0155
+      - id: psltscale
+        type: s2
+        doc: 0x0156-0x0157, $PSLTSCALE
+      - id: tree_depth
+        type: s2
+        doc: 0x0158-0x0159, $TREEDEPTH
       - id: unknown6
-        type: f8
-        doc: 0x014e-0x0155
-      - id: unknown7a
-        type: s2
-        doc: 0x0156-0x0157
-      - id: unknown7b
-        type: s2
-        doc: 0x0158-0x0159
-      - id: unknown7c
         type: s2
         doc: 0x015a-0x015b
       - id: unknown_conversion_from_1_40
@@ -268,13 +271,13 @@ types:
       - id: text_style_index
         type: s2
         doc: 0x018e-0x018f, $TEXTSTYLE (index)
-      - id: osnap
+      - id: osnap_mode
         enum: osnap_modes
         type: s2
         doc: 0x0190-0x0191, $OSMODE
-      - id: attributes
+      - id: att_mode
         enum: attributes
-        type: s2
+        type: u2
         doc: 0x0192-0x0193, $ATTMODE
       - id: menu
         size: 15

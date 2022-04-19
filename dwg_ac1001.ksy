@@ -171,7 +171,7 @@ types:
       - id: view_size
         type: f8
         doc: 0x00e0-0x00e7
-      - id: snap
+      - id: snap_mode
         type: s2
         doc: 0x00e8-0x00e9, $SNAPMODE
       - id: snap_resolution
@@ -190,25 +190,25 @@ types:
         type: s2
         enum: iso_plane
         doc: 0x0114-0x0115, $SNAPISOPAIR
-      - id: grid
+      - id: grid_mode
         type: s2
         doc: 0x0116-0x0117, $GRIDMODE
       - id: grid_unit
         type: point_2d
         doc: 0x0118-0x0127, $GRIDUNIT/10|20
-      - id: ortho
+      - id: ortho_mode
         type: s2
         doc: 0x0128-0x0129, $ORTHOMODE
-      - id: regen
+      - id: regen_mode
         type: s2
         doc: 0x012a-0x012b, $REGENMODE
-      - id: fill
+      - id: fill_mode
         type: s2
         doc: 0x012c-0x012d, $FILLMODE
-      - id: qtext
+      - id: qtext_mode
         type: s2
         doc: 0x012e-0x012f, $QTEXTMODE
-      - id: drag
+      - id: drag_mode
         type: s2
         doc: 0x0130-0x0131, $DRAGMODE
       - id: linetype_scale
@@ -220,25 +220,28 @@ types:
       - id: trace_width
         type: f8
         doc: 0x0142-0x0149, $TRACEWID
-      - id: current_layer_index
+      - id: celayer
         type: s2
         doc: 0x014a-0x014b, $CLAYER
-      - id: current_color_convert
+      - id: cecolor_lo
+        type: s4
+        doc: 0x014c-0x014f, $CECOLOR (2, 3, 8, 15 - default)
+      - id: cecolor_hi
+        type: s4
+        doc: 0x0150-0x0153, $CECOLOR (0)
+      - id: unknown5
         type: s2
-        doc: 0x014c-0x014d, (2, 3, 8, 15 - default)
+        doc: 0x0154-0x0155
+      - id: psltscale
+        type: s2
+        doc: 0x0156-0x0157, $PSLTSCALE
+      - id: tree_depth
+        type: s2
+        doc: 0x0158-0x0159, $TREEDEPTH
       - id: unknown6
-        type: f8
-        doc: 0x014e-0x0155
-      - id: unknown7a
-        type: s2
-        doc: 0x0156-0x0157
-      - id: unknown7b
-        type: s2
-        doc: 0x0158-0x0159
-      - id: unknown7c
         type: s2
         doc: 0x015a-0x015b
-      - id: unknown8
+      - id: unknown7
         type: f8
         doc: 0x015c-0x0163
       - id: linear_units_format
@@ -248,7 +251,7 @@ types:
       - id: linear_units_precision
         type: s2
         doc: 0x0166-0x0167, $LUPREC
-      - id: axis
+      - id: axis_mode
         type: s2
         doc: 0x0168-0x0169, $AXISMODE
       - id: axis_value
@@ -270,13 +273,13 @@ types:
       - id: text_style_index
         type: s2
         doc: 0x018e-0x018f, $TEXTSTYLE (index)
-      - id: osnap
+      - id: osnap_mode
         enum: osnap_modes
         type: s2
         doc: 0x0190-0x0191, $OSMODE
-      - id: attributes
+      - id: att_mode
         enum: attributes
-        type: s2
+        type: u2
         doc: 0x0192-0x0193, $ATTMODE
       - id: menu
         size: 15
@@ -356,7 +359,7 @@ types:
       - id: unknown29
         type: s2
         doc: 0x02e1-0x02e2
-      - id: blip
+      - id: blip_mode
         type: s2
         doc: 0x02e3-0x02e4, $BLIPMODE
       - id: dim_suppression_of_zeros
