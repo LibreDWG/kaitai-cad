@@ -223,7 +223,7 @@ types:
       - id: celayer
         type: s2
         doc: 0x014a-0x014b, $CLAYER
-      - id: current_color_convert
+      - id: old_cecolor
         type: f8
         doc: 0x014c-0x0153
       - id: unknown7a
@@ -424,8 +424,8 @@ types:
         enum: coordinates
         type: s2
         doc: 0x0319-0x031a, $COORDS
-      - id: current_color
-        enum: current_color
+      - id: cecolor
+        enum: cecolor
         type: s2
         doc: 256d - bylayer, 0d - byblock, other index (1-255), $CECOLOR
       - id: current_linetype
@@ -1515,7 +1515,7 @@ enums:
     0: off
     1: normal
     2: on
-  current_color:
+  cecolor:
     0: byblock
     1: red
     2: yellow

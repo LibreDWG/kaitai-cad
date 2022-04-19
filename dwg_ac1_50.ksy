@@ -1362,7 +1362,7 @@ enums:
     0: off
     1: normal
     2: on
-  current_color:
+  cecolor:
     0: byblock
     1: red
     2: yellow
