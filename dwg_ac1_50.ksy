@@ -713,10 +713,10 @@ types:
       - id: horiz_alignment
         type: u1
         if: entity_common.flag2_2
-        # 1, 2 nebo 7?
-      - id: align_pt
+      - id: aligned_to
         type: point_2d
         if: entity_common.flag2_1
+        doc: ATTRIB/11|21
   entity_block_begin:
     seq:
       - id: entity_common
@@ -1267,21 +1267,21 @@ types:
         type: b1
   generation_flags:
     seq:
-      - id: flag1
+      - id: flag128
         type: b1
-      - id: flag2
+      - id: flag64
         type: b1
-      - id: flag3
+      - id: flag32
         type: b1
-      - id: flag4
+      - id: flag16
         type: b1
-      - id: flag5
+      - id: flag8
         type: b1
       - id: upside_down
         type: b1
       - id: backwards
         type: b1
-      - id: flag8
+      - id: flag1
         type: b1
   point_2d:
     seq:

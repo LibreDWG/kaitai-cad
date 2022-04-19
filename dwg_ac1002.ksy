@@ -782,10 +782,9 @@ types:
       - id: u6
         type: u1
         if: entity_common.flag2_4
-      - id: u7
+      - id: horiz_alignment
         type: u1
         if: entity_common.flag2_2
-        # 1, 2 nebo 7?
       - id: aligned_to
         type: point_2d
         if: entity_common.flag2_1
