@@ -90,8 +90,7 @@ types:
       - id: magic
         contents: AC1.50
         # [0x41, 0x43, 0x31, 0x2e, 0x35, 0x30]
-        # encoding: ASCII
-        doc: 0x0000-0x0005, $ACADVER "AC1.50"
+        doc: 0x0000-0x0005, $ACADVER
       - id: zeros
         size: 6
       - id: zero_one_or_three

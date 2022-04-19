@@ -21,14 +21,14 @@ seq:
     type: entity
     repeat: expr
     repeat-expr: header.num_entities
-  # 13c layers? [43 5c 5e 02 00 63 2b 00 00 00 00 00 00]
+  # padding slack to ignore
 types:
   header:
     seq:
       - id: magic
         contents: AC1.40
         # [0x41, 0x43, 0x31, 0x2e, 0x34, 0x30]
-        doc: 0x0000-0x0005, $ACADVER "AC1.40"
+        doc: 0x0000-0x0005, $ACADVER
       - id: zeros
         size: 6
       - id: insertion_base
