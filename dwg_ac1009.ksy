@@ -1706,7 +1706,7 @@ types:
       - id: view_ctrl_vport_11_21
         type: point_2d
         doc: VPORT/11|21
-      - id: view_taget_vport_17_27_37
+      - id: view_target_vport_17_27_37
         type: point_3d
         doc: VPORT/17|27|37
       - id: vport_16_26_36
