@@ -1,6 +1,6 @@
 meta:
   id: dwg_ac1_50
-  title: AutoCAD drawing (AC1003)
+  title: AutoCAD r1.50 drawing (AC1.50)
   application: AutoCAD
   file-extension:
     - dwg
@@ -168,7 +168,7 @@ types:
         doc: 0x00c8-0x00da, $VIEWCTRL/10|20|30
       - id: view_size
         type: f8
-        doc: 0x00e0-0x00e7
+        doc: 0x00e0-0x00e7, $VIEWSIZE/40
       - id: snap
         type: s2
         doc: 0x00e8-0x00e9, $SNAPMODE
@@ -236,7 +236,7 @@ types:
       - id: unknown7c
         type: s2
         doc: 0x015a-0x015b
-      - id: unknown8
+      - id: unknown_conversion_from_1_40
         type: f8
         doc: 0x015c-0x0163
       - id: linear_units_format
@@ -338,8 +338,72 @@ types:
         type: s2
         doc: 0x01fa-0x01fb, $LIMCHECK
         if: _parent.num_header_vars == 83
-      - id: unknown10
-        size: 45
+      - id: unknown10a
+        type: u1
+        doc: 0x01fc
+        if: _parent.num_header_vars == 83
+      - id: unknown10b
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10c
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10d
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10e
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10f
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10g
+        type: f8
+        if: _parent.num_header_vars == 83
+      - id: unknown10h
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10i
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10j
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10k
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10l
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10m
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10n
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10o
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10p
+        type: f8
+        if: _parent.num_header_vars == 83
+      - id: unknown10q
+        type: f8
+        if: _parent.num_header_vars == 83
+      - id: unknown10r
+        type: u2
+        if: _parent.num_header_vars == 83
+      - id: unknown10s
+        type: u2
+        if: _parent.num_header_vars == 83
+      - id: unknown10t
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10u
+        type: u1
+        if: _parent.num_header_vars == 83
+      - id: unknown10v
+        type: u1
         if: _parent.num_header_vars == 83
       - id: elevation
         type: f8
@@ -623,11 +687,11 @@ types:
     seq:
       - id: entity_common
         type: entity_common
-      - id: u1
+      - id: x
         type: f8
-      - id: u2
+      - id: y
         type: f8
-      - id: u3
+      - id: height
         type: f8
       - id: size
         type: s2
@@ -637,19 +701,19 @@ types:
         type: s2
       - id: text2
         size: size2
-      - id: u4
+      - id: generation
         size: 1
-      - id: u5
+      - id: rotation
         type: f8
         if: entity_common.flag2_7
-      - id: u6
+      - id: horiz_alignment
         type: u1
         if: entity_common.flag2_2
         # 1, 2 nebo 7?
-      - id: u7
+      - id: align_pt.x
         type: f8
         if: entity_common.flag2_1
-      - id: u8
+      - id: align_pt.y
         type: f8
         if: entity_common.flag2_1
   entity_block_begin:
@@ -873,15 +937,20 @@ types:
         type: entity_common
       - id: x
         type: f8
+        doc: SHAPE/10
       - id: y
         type: f8
+        doc: SHAPE/20
       - id: height
         type: f8
+        doc: SHAPE/40
       - id: item_num
         type: u1
+        doc: SHAPE/2
       - id: angle_in_radians
         type: f8
         if: entity_common.flag2_8
+        doc: SHAPE/50
       - id: load_num
         type: u1
   entity_solid:

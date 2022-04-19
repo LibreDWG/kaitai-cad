@@ -1,6 +1,6 @@
 meta:
   id: dwg_0140
-  title: AutoCAD drawing (AC1.40)
+  title: AutoCAD r1.40 drawing (AC1.40)
   application: AutoCAD
   file-extension:
     - dwg
@@ -81,20 +81,17 @@ types:
       - id: current_color
         type: s2
         doc: 0x00c6-0x00c7
-      - id: unknown1
-        type: s2
-        doc: 0x00c8-0x00c9
       - id: layers
         type: s2
         repeat: expr
-        repeat-expr: 127
-        doc: 0x00ca-0x01c7
+        repeat-expr: 128
+        doc: 0x00c8-0x01c7
       - id: dim_arrowsize
         type: f8
         doc: 0x01c8-0x01cf
-      - id: unknown2
+      - id: unknown1
         type: f8
-        doc: 0x01d0-0x01d7, dim?
+        doc: 0x01d0-0x01d7
       - id: linear_units_format
         type: s2
         enum: unit_types

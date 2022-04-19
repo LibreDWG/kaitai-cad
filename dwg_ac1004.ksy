@@ -1,6 +1,6 @@
 meta:
   id: dwg_ac1004
-  title: AutoCAD drawing (AC1004)
+  title: AutoCAD r9 drawing (AC1004)
   application: AutoCAD
   file-extension:
     - dwg
@@ -23,23 +23,23 @@ seq:
   - id: blocks
     type: block
     repeat: expr
-    repeat-expr: header.table_block.items
+    repeat-expr: header.table_block.numitems
   - id: layers
     type: layer
     repeat: expr
-    repeat-expr: header.table_layer.items
+    repeat-expr: header.table_layer.numitems
   - id: styles
     type: style
     repeat: expr
-    repeat-expr: header.table_style.items
+    repeat-expr: header.table_style.numitems
   - id: linetypes
     type: linetype
     repeat: expr
-    repeat-expr: header.table_linetype.items
+    repeat-expr: header.table_linetype.numitems
   - id: views
     type: view
     repeat: expr
-    repeat-expr: header.table_view.items
+    repeat-expr: header.table_view.numitems
   - id: block_entities
     type: real_entities
     size: header.blocks_size
@@ -103,19 +103,19 @@ types:
       - id: dwg_version
         type: s1
       - id: entities_start
-        type: s4
-      - id: entities_end
-        type: s4
-      - id: blocks_start
-        type: s4
-      - id: blocks_size_raw
         type: u4
+      - id: entities_end
+        type: u4
+      - id: blocks_start
+        type: u4
+      - id: blocks_offset
+        type: u4
+        # contents: 0x40000000
       - id: blocks_end
-        type: s4
-      - id: unknown4b
-        size: 2
-      - id: unknown4c
-        size: 2
+        type: u4
+      - id: blocks_max
+        type: u4
+        # contents: 0x80000000
       - id: table_block
         type: table
       - id: table_layer
@@ -129,19 +129,19 @@ types:
       - id: variables
         type: header_variables
     instances:
-      blocks_size_unknown:
-         value: (blocks_size_raw & 0xff000000) >> 24
+      #blocks_size_unknown:
+      #   value: (blocks_offset & 0xff000000) >> 24
       blocks_size:
-         value: (blocks_size_raw & 0x00ffffff)
+         value: (blocks_offset & 0x00ffffff)
   table:
     seq:
-      - id: item_size
+      - id: size
         type: u2
-      - id: items
+      - id: numitems
         type: u2
-      - id: unknown
-        size: 2
-      - id: begin
+      - id: flags
+        type: u2
+      - id: start
         type: u4
   header_variables:
     seq:
@@ -1033,15 +1033,15 @@ types:
     seq:
       - id: entity_common
         type: entity_common
-      - id: closed
+      - id: curve_type
         type: u1
         if: entity_common.flag2_8
         doc: POLYLINE/66
-      - id: x
+      - id: start_width
         type: f8
         if: entity_common.flag2_7
         doc: POLYLINE/40
-      - id: y
+      - id: end_width
         type: f8
         if: entity_common.flag2_6
         doc: POLYLINE/41
@@ -1152,10 +1152,10 @@ types:
       - id: y
         type: f8
         doc: VERTEX/20
-      - id: width
+      - id: start_width
         type: f8
         if: entity_common.flag2_8
-      - id: unknown1
+      - id: end_width
         type: f8
         if: entity_common.flag2_7
       - id: bulge
@@ -1165,21 +1165,21 @@ types:
       - id: unknown2
         type: u1
         if: entity_common.flag2_5
-      - id: unknown_in_radians
+      - id: tangent_dir
         type: f8
         if: entity_common.flag2_4
         doc: VERTEX/50
   attdef_flags:
     seq:
-      - id: flag_1
+      - id: flag_8
         type: b1
-      - id: flag_2
+      - id: flag_7
         type: b1
-      - id: flag_3
-        type: b1
-      - id: flag_4
+      - id: flag_6
         type: b1
       - id: flag_5
+        type: b1
+      - id: flag_4
         type: b1
       - id: invisible
         type: b1
@@ -1190,15 +1190,15 @@ types:
   attdef_flags2:
     seq:
 ## TODO Tohle je divne
-      - id: flag_1
+      - id: flag_8
         type: b1
-      - id: flag_2
+      - id: flag_7
         type: b1
-      - id: flag_3
-        type: b1
-      - id: flag_4
+      - id: flag_6
         type: b1
       - id: flag_5
+        type: b1
+      - id: flag_4
         type: b1
       - id: middle
         type: b1
@@ -1225,19 +1225,22 @@ types:
         doc: LAYER/6
   layer_flag:
     seq:
-      - id: flag1
+      - id: flag128
         type: b1
-      - id: flag2
+      - id: is_xref_dep
         type: b1
-      - id: flag3
+        doc: bit 64
+      - id: is_xref_resolved
         type: b1
+        doc: bit 32
+      - id: is_xref_ref
+        type: b1
+        doc: bit 16
       - id: flag4
         type: b1
-      - id: flag5
+      - id: locked
         type: b1
-      - id: flag6
-        type: b1
-      - id: flag7
+      - id: frozen_vp
         type: b1
       - id: frozen
         type: b1
@@ -1298,21 +1301,24 @@ types:
         type: f8
   linetype_flag:
     seq:
-      - id: flag1
+      - id: flag128
+        type: b1
+      - id: is_xref_dep
+        type: b1
+        doc: bit 64
+      - id: is_xref_resolved
+        type: b1
+        doc: bit 32
+      - id: is_xref_ref
+        type: b1
+        doc: bit 16
+      - id: flag4
         type: b1
       - id: flag2
         type: b1
-      - id: flag3
+      - id: flag1
         type: b1
-      - id: flag4
-        type: b1
-      - id: flag5
-        type: b1
-      - id: flag6
-        type: b1
-      - id: flag7
-        type: b1
-      - id: frozen
+      - id: flag0
         type: b1
   real_entities:
     seq:
@@ -1355,19 +1361,20 @@ types:
         size: 64
   style_flag:
     seq:
-      - id: flag1
+      - id: flag128
         type: b1
-      - id: flag2
+      - id: is_xref_dep
         type: b1
-      - id: flag3
+        doc: bit 64
+      - id: is_xref_resolved
         type: b1
-      - id: flag4
+      - id: is_xref_ref
         type: b1
-      - id: flag5
+      - id: flag8
         type: b1
       - id: vertical
         type: b1
-      - id: flag7
+      - id: flag2
         type: b1
       - id: load
         type: b1
@@ -1397,39 +1404,40 @@ types:
         type: s2
   view_flag:
     seq:
-      - id: flag1
+      - id: flag128
         type: b1
-      - id: flag2
+      - id: is_xref_dep
         type: b1
-      - id: flag3
+        doc: bit 64
+      - id: is_xref_resolved
         type: b1
-      - id: flag4
-        type: b1
-      - id: flag5
-        type: b1
-      - id: flag6
-        type: b1
-      - id: flag7
+      - id: is_xref_ref
         type: b1
       - id: flag8
         type: b1
-  generation_flags:
-    seq:
-      - id: flag1
+      - id: flag4
         type: b1
       - id: flag2
         type: b1
-      - id: flag3
+      - id: pspace
         type: b1
-      - id: flag4
+  generation_flags:
+    seq:
+      - id: gen128
         type: b1
-      - id: flag5
+      - id: gen64
+        type: b1
+      - id: gen32
+        type: b1
+      - id: gen16
+        type: b1
+      - id: gen8
         type: b1
       - id: upside_down
         type: b1
       - id: backwards
         type: b1
-      - id: flag8
+      - id: gen1
         type: b1
   point_2d:
     seq:

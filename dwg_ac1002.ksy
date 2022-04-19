@@ -1,6 +1,6 @@
 meta:
   id: dwg_ac1002
-  title: AutoCAD drawing (AC1002)
+  title: AutoCAD r2.5 drawing (AC1002)
   application: AutoCAD
   file-extension:
     - dwg
@@ -172,7 +172,7 @@ types:
         doc: 0x00c8-0x00da, $VIEWCTRL/10|20|30
       - id: view_size
         type: f8
-        doc: 0x00e0-0x00e7
+        doc: 0x00e0-0x00e7, $VIEWSIZE/40
       - id: snap
         type: s2
         doc: 0x00e8-0x00e9, $SNAPMODE
@@ -341,8 +341,51 @@ types:
         enum: limits_check
         type: s2
         doc: 0x01fa-0x01fb, $LIMCHECK
-      - id: unknown10
-        size: 45
+      - id: unknown10a
+        type: u1
+        doc: 0x01fc
+      - id: unknown10b
+        type: u1
+      - id: unknown10c
+        type: u1
+      - id: unknown10d
+        type: u1
+      - id: unknown10e
+        type: u1
+      - id: unknown10f
+        type: u1
+      - id: unknown10g
+        type: f8
+      - id: unknown10h
+        type: u1
+      - id: unknown10i
+        type: u1
+      - id: unknown10j
+        type: u1
+      - id: unknown10k
+        type: u1
+      - id: unknown10l
+        type: u1
+      - id: unknown10m
+        type: u1
+      - id: unknown10n
+        type: u1
+      - id: unknown10o
+        type: u1
+      - id: unknown10p
+        type: f8
+      - id: unknown10q
+        type: f8
+      - id: unknown10r
+        type: u2
+      - id: unknown10s
+        type: u2
+      - id: unknown10t
+        type: u1
+      - id: unknown10u
+        type: u1
+      - id: unknown10v
+        type: u1
       - id: elevation
         type: f8
         doc: 0x0229-0x0230, $ELEVATION
@@ -371,13 +414,11 @@ types:
         type: f8
         doc: 0x02ee-0x02f5, $DIMDLE
       - id: dim_arrowhead_block
-        size: 32
+        size: 33
         type: str
         encoding: ASCII
         terminator: 0x00
         doc: $DIMBLK
-      - id: unknown30
-        type: s1
       - id: circle_zoom_percent
         type: s2
         doc: 0x0317-0x0318
@@ -420,15 +461,13 @@ types:
         type: s2
         doc: 0x033f-0x0340, $USRTIMER
       - id: fast_zoom
-        type: s1
-        doc: 0x0341, $FASTZOOM
-      - id: unknown33
-        size: 1
+        type: u2
+        doc: 0x0341-0x0342, $FASTZOOM
       - id: sketch_type
-        type: s1
-        doc: 0x0343, $SKPOLY
+        type: u2
+        doc: 0x0343-0x0344, $SKPOLY
       - id: unknown33b
-        size: 7
+        size: 6
       - id: unknown34
         type: f8
       - id: angle_base
@@ -948,15 +987,20 @@ types:
         type: entity_common
       - id: x
         type: f8
+        doc: SHAPE/10
       - id: y
         type: f8
+        doc: SHAPE/20
       - id: height
         type: f8
+        doc: SHAPE/40
       - id: item_num
         type: u1
-      - id: angle
+        doc: SHAPE/2
+      - id: angle_in_radians
         type: f8
         if: entity_common.flag2_8
+        doc: SHAPE/50
       - id: load_num
         type: u1
   entity_solid:
@@ -1246,8 +1290,12 @@ types:
         encoding: ASCII
         terminator: 0x00
         doc: STYLE/3
-      - id: u1
+      - id: bigfont_file
         size: 64
+        type: str
+        encoding: ASCII
+        terminator: 0x00
+        doc: STYLE/4
   style_flag:
     seq:
       - id: flag1

@@ -1,6 +1,6 @@
 meta:
   id: dwg_ac1006
-  title: AutoCAD drawing (AC1006)
+  title: AutoCAD r10 drawing (AC1006)
   application: AutoCAD
   file-extension:
     - dwg
@@ -182,7 +182,7 @@ types:
         doc: 0x00c8-0x00da, $VIEWCTRL/10|20|30
       - id: view_size
         type: f8
-        doc: 0x00e0-0x00e7
+        doc: 0x00e0-0x00e7, $VIEWSIZE/40
       - id: snap
         type: s2
         doc: 0x00e8-0x00e9, $SNAPMODE
@@ -238,12 +238,12 @@ types:
       - id: current_color_convert
         type: f8
         doc: 0x014c-0x0153
-      - id: unknown7a
-        size: 2
+      - id: unknown6
+        type: u2
         doc: 0x0154-0x0155
-      - id: unknown7b
-        size: 2
-        doc: 0x0156-0x0157
+      - id: psltscale
+        type: u2
+        doc: 0x0156-0x0157, $PSLTSCALE/70
       - id: unknown7c
         size: 2
         doc: 0x0158-0x0159
@@ -271,7 +271,7 @@ types:
         doc: 0x017a-0x0181, $SKETCHINC
       - id: fillet_radius
         type: f8
-        doc: $FILLETRAD
+        doc: $FILLETRAD/40
       - id: units_for_angles
         enum: units_for_angles
         type: s2
@@ -286,8 +286,8 @@ types:
         enum: osnap_modes
         type: s2
         doc: 0x0190-0x0191, $OSMODE
-      - id: attributes
-        enum: attributes
+      - id: att_visibility
+        enum: att_visibility
         type: s2
         doc: 0x0192-0x0193, $ATTMODE
       - id: menu
@@ -351,8 +351,51 @@ types:
         enum: limits_check
         type: s2
         doc: 0x01fa-0x01fb, $LIMCHECK
-      - id: unknown10
-        size: 45
+      - id: unknown10a
+        type: u1
+        doc: 0x01fc
+      - id: unknown10b
+        type: u1
+      - id: unknown10c
+        type: u1
+      - id: unknown10d
+        type: u1
+      - id: unknown10e
+        type: u1
+      - id: unknown10f
+        type: u1
+      - id: unknown10g
+        type: f8
+      - id: unknown10h
+        type: u1
+      - id: unknown10i
+        type: u1
+      - id: unknown10j
+        type: u1
+      - id: unknown10k
+        type: u1
+      - id: unknown10l
+        type: u1
+      - id: unknown10m
+        type: u1
+      - id: unknown10n
+        type: u1
+      - id: unknown10o
+        type: u1
+      - id: unknown10p
+        type: f8
+      - id: unknown10q
+        type: f8
+      - id: unknown10r
+        type: u2
+      - id: unknown10s
+        type: u2
+      - id: unknown10t
+        type: u1
+      - id: unknown10u
+        type: u1
+      - id: unknown10v
+        type: u1
       - id: elevation
         type: f8
         doc: 0x0229-0x0230, $ELEVATION
@@ -429,24 +472,12 @@ types:
         doc: 0x033f-0x0340, $USRTIMER
       - id: fast_zoom
         type: u2
-        doc: 0x0341, $FASTZOOM
+        doc: 0x0341-0x0342, $FASTZOOM/70
       - id: sketch_type
         type: u2
-        doc: 0x0343, $SKPOLY
-      - id: unknown33a
-        type: u2
-      - id: unknown33b
-        type: u2
-      - id: unknown33c
-        type: u2
-      - id: unknown33d
-        type: u2
-      - id: unknown33e
-        type: u2
-      - id: unknown33f
-        type: u2
-      - id: unknown33g
-        type: u2
+        doc: 0x0343-0x0344, $SKPOLY
+      - id: unknown_date
+        type: unknown_date
       - id: angle_base
         type: f8
         doc: 0x0353-0x035a, $ANGBASE
@@ -546,6 +577,7 @@ types:
         doc: 0x03ed-0x03ee, $MIRRTEXT
       - id: table_ucs
         type: table
+        doc: 0x03ef-0x03f9
       - id: unknown37
         size: 2
       - id: ucs_origin_point
@@ -566,14 +598,15 @@ types:
       - id: view_rotation_angle_radians
         type: f8
         doc: $VIEWTWIST
-      - id: unknown42a
+      - id: frontz_z
         type: f8
-        doc: $BACKZ or $FRONTZ
-      - id: unknown42b
+        doc: $FRONTZ
+      - id: backz_z
         type: f8
-        doc: $BACKZ or $FRONTZ
-      - id: unknown42c
+        doc: $BACKZ
+      - id: view_mode
         type: u2
+        doc: $VIEWMODE
       - id: dim_tofl
         type: u1
         doc: 0x047d, $DIMTOFL
@@ -582,50 +615,54 @@ types:
         type: str
         encoding: ASCII
         terminator: 0x00
-        doc: $DIMBLK1
+        doc: 0x047e-0x049e, $DIMBLK1
       - id: dim_arrowhead_block2
         size: 33
         type: str
         encoding: ASCII
         terminator: 0x00
-        doc: $DIMBLK2
+        doc: 0x049f-0x04bf, $DIMBLK2
       - id: dim_arrowhead_blocks_control
         type: u1
-        doc: $DIMSAH
+        doc: 0x04c0, $DIMSAH
       - id: dim_text_between_ext_lines
         type: u1
-        doc: $DIMTIX
+        doc: 0x04c1, $DIMTIX
       - id: dim_arrowhead_suppress
         type: u1
-        doc: $DIMSOXD
+        doc: 0x04c2, $DIMSOXD
       - id: dim_text_vertical_position_size
         type: f8
-        doc: $DIMTVP
-      - id: unknown440
+        doc: 0x04c3-0x4ca, $DIMTVP
+      - id: unknown_string
         size: 33
+        type: str
+        encoding: ASCII
+        terminator: 0x00
       - id: handling
         type: u2
-        doc: $HANDLING
+        doc: 0x04ec-0x04ed, $HANDLING
       - id: handseed
         type: u8be
-        doc: $HANDSEED, in hex
+        doc: 0x04ee-0x04f5, $HANDSEED, in hex
       - id: surfu
         type: u2
-        doc: $SURFU
+        doc: 0x04f6-0x04f7, $SURFU
       - id: surfv
         type: u2
-        doc: $SURFV
+        doc: 0x04f8-0x04f9, $SURFV
       - id: surftype
         type: u2
-        doc: $SURFTYPE
+        doc: 0x04fa-0x94fb, $SURFTYPE
       - id: surftab1
         type: u2
-        doc: $SURFTAB1
+        doc: 0x04fc-0x04fd, $SURFTAB1
       - id: surftab2
         type: u2
-        doc: $SURFTAB2
+        doc: 0x04fe-0x04ff, $SURFTAB2
       - id: table_vport
         type: table
+        doc: 0x0500-0x050a
       - id: flatland
         type: u2
         doc: 0x050a-0x050b, $FLATLAND
@@ -642,8 +679,9 @@ types:
         type: table
         doc: 0x0512-0x051c
         if: _parent.num_header_vars == 160
-      - id: unknown48
+      - id: world_view
         type: u2
+        doc: 0x051d-0x051e, $WORLDVIEW/70
         if: _parent.num_header_vars == 160
     instances:
       create_date:
@@ -688,6 +726,22 @@ types:
         type: f8
       - id: unknown_repeating18
         type: f8
+  unknown_date:
+    seq:
+      - id: month
+        type: u2
+      - id: day
+        type: u2
+      - id: year
+        type: u2
+      - id: hour
+        type: u2
+      - id: minute
+        type: u2
+      - id: second
+        type: u2
+      - id: ms
+        type: u2
   entity:
     seq:
       - id: entity_type
@@ -724,7 +778,7 @@ types:
         type: b1
       - id: entity_mode2
         type: b1
-      - id: entity_mode3
+      - id: entity_handling_flag
         type: b1
       - id: entity_mode4
         type: b1
@@ -787,6 +841,12 @@ types:
       - id: entity_thickness
         type: f8
         if: entity_mode.entity_thickness_flag
+      - id: handling_size
+        type: u1
+        if: entity_mode.entity_handling_flag
+      - id: handling_id
+        size: handling_size
+        if: entity_mode.entity_handling_flag
   entity_arc:
     seq:
       - id: entity_common
@@ -1234,15 +1294,20 @@ types:
         type: entity_common
       - id: x
         type: f8
+        doc: SHAPE/10
       - id: y
         type: f8
+        doc: SHAPE/20
       - id: height
         type: f8
+        doc: SHAPE/40
       - id: item_num
         type: u1
-      - id: angle
+        doc: SHAPE/2
+      - id: angle_in_radians
         type: f8
         if: entity_common.flag2_8
+        doc: SHAPE/50
       - id: load_num
         type: u1
   entity_solid:
@@ -1528,8 +1593,12 @@ types:
         encoding: ASCII
         terminator: 0x00
         doc: STYLE/3
-      - id: u1
+      - id: bigfont_file
         size: 64
+        type: str
+        encoding: ASCII
+        terminator: 0x00
+        doc: STYLE/4
   style_flag:
     seq:
       - id: flag1
@@ -1848,10 +1917,10 @@ enums:
     0: absolute_coordinates
     1: absolute_coordinates_realtime
     2: relative_polar_coordinates
-  attributes:
+  att_visibility:
     0: off
     1: normal
-    2: on
+    2: all
   current_color:
     0: byblock
     1: red

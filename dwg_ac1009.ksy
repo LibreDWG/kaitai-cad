@@ -1,6 +1,6 @@
 meta:
   id: dwg_ac1009
-  title: AutoCAD drawing (AC1009)
+  title: AutoCAD r11 drawing (AC1009)
   application: AutoCAD
   file-extension:
     - dwg
@@ -20,41 +20,73 @@ seq:
   - id: entities
     type: real_entities
     size: header.entities_end - header.entities_start
+  - id: crc_entities
+    size: header.table_block.start-_io.pos
   - id: blocks
     type: block
     repeat: expr
-    repeat-expr: header.table_block.items
+    repeat-expr: header.table_block.numitems
+  - id: crc_blocks
+    size: header.table_layer.start-_io.pos
   - id: layers
     type: layer
     repeat: expr
-    repeat-expr: header.table_layer.items
-#  - id: styles
-#    type: style
-#    repeat: expr
-#    repeat-expr: header.table_style.items
-#  - id: linetypes
-#    type: linetype
-#    repeat: expr
-#    repeat-expr: header.table_linetype.items
-#  - id: views
-#    type: view
-#    repeat: expr
-#    repeat-expr: header.table_view.items
-#  - id: block_entities
-#    type: real_entities
-#    size: header.blocks_size
-#  - id: ucss
-#    type: ucs
-#    repeat: expr
-#    repeat-expr: header.variables.table_ucs.items
-#  - id: vports
-#    type: vport
-#    repeat: expr
-#    repeat-expr: header.variables.table_vport.items
-#  - id: appids
-#    type: appid
-#    repeat: expr
-#    repeat-expr: header.variables.table_appid.items
+    repeat-expr: header.table_layer.numitems
+  - id: crc_layers
+    size: header.table_style.start-_io.pos
+  - id: styles
+    type: style
+    repeat: expr
+    repeat-expr: header.table_style.numitems
+  - id: crc_styles
+    size: header.table_linetype.start-_io.pos
+  - id: linetypes
+    type: linetype
+    repeat: expr
+    repeat-expr: header.table_linetype.numitems
+  - id: crc_linetypes
+    size: header.table_view.start-_io.pos
+  - id: views
+    type: view
+    repeat: expr
+    repeat-expr: header.table_view.numitems
+  - id: crc_views
+    size: header.variables.table_ucs.start-_io.pos
+  - id: ucss
+    type: ucs
+    repeat: expr
+    repeat-expr: header.variables.table_ucs.numitems
+  - id: crc_ucss
+    size: header.variables.table_vport.start-_io.pos
+  - id: vports
+    type: vport
+    repeat: expr
+    repeat-expr: header.variables.table_vport.numitems
+  - id: crc_vports
+    size: header.variables.table_appid.start-_io.pos
+  - id: appids
+    type: appid
+    repeat: expr
+    repeat-expr: header.variables.table_appid.numitems
+  - id: crc_appids
+    size: header.variables.table_dimstyle.start-_io.pos
+  - id: dimstyles
+    type: dimstyle
+    repeat: expr
+    repeat-expr: header.variables.table_dimstyle.numitems
+  - id: crc_dimstyles
+    size: header.variables.table_vx.start-_io.pos
+  - id: vxs
+    type: vx
+    repeat: expr
+    repeat-expr: header.variables.table_vx.numitems
+  - id: crc_vxs
+    size: header.blocks_start-_io.pos
+  - id: block_entities
+    type: real_entities
+    size: header.blocks_size
+  - id: crc_block_entities
+    size: 32
   - id: todo
     size-eos: true
     repeat: eos
@@ -71,17 +103,55 @@ types:
         encoding: ASCII
         terminator: 0x00
         doc: BLOCK/2
-      - id: u2
+      - id: block_scaling
         type: s1
-      - id: u3
-        type: s1
-      - id: u4
-        type: s1
-      - id: u5
-        type: s1
-      - id: u6
+      - id: num_owned
+        type: s2
+      - id: flag2
+        type: block_flag2
+#      - id: num_inserts
+#        type: u1
+#      - id: flag3
+#        type: block_flag3
+      - id: u1
         type: f8
   block_flag:
+    seq:
+      - id: none
+        type: b1
+      - id: anonymous_block
+        type: b1
+      - id: flag3
+        type: b1
+      - id: flag4
+        type: b1
+      - id: flag5
+        type: b1
+      - id: flag6
+        type: b1
+      - id: resolved_external_reference
+        type: b1
+      - id: references_external_reference
+        type: b1
+  block_flag2:
+    seq:
+      - id: flag1
+        type: b1
+      - id: flag2
+        type: b1
+      - id: flag3
+        type: b1
+      - id: flag4
+        type: b1
+      - id: flag5
+        type: b1
+      - id: flag6
+        type: b1
+      - id: flag7
+        type: b1
+      - id: flag8
+        type: b1
+  block_flag3:
     seq:
       - id: flag1
         type: b1
@@ -103,33 +173,37 @@ types:
     seq:
       - id: magic
         contents: [0x41, 0x43, 0x31, 0x30, 0x30, 0x39]
-        doc: 0x0000-0x0005, $ACADVER
+        doc: 0x0000-0x0005, $ACADVER/1
       - id: zeros
         size: 6
       - id: zero_one_or_three
         type: s1
       - id: unknown_3
         type: s2
+        contents: 3
       - id: num_sections
-        type: s2
+        type: u2
+        contents: 5
       - id: num_header_vars
-        type: s2
+        type: u2
+        contents: 129
       - id: dwg_version
-        type: s1
+        type: u1
+        contents: 0
       - id: entities_start
-        type: s4
-      - id: entities_end
-        type: s4
-      - id: blocks_start
-        type: s4
-      - id: blocks_size_raw
         type: u4
+      - id: entities_end
+        type: u4
+      - id: blocks_start
+        type: u4
+      - id: blocks_offset
+        type: u4
+        # contents: 0x40000000
       - id: blocks_end
-        type: s4
-      - id: unknown4b
-        size: 2
-      - id: unknown4c
-        size: 2
+        type: u4
+      - id: blocks_max
+        type: u4
+        # contents: 0x80000000
       - id: table_block
         type: table
       - id: table_layer
@@ -143,19 +217,19 @@ types:
       - id: variables
         type: header_variables
     instances:
-      blocks_size_unknown:
-         value: (blocks_size_raw & 0xff000000) >> 24
+      #blocks_size_unknown:
+      #   value: (blocks_offset & 0xff000000) >> 24
       blocks_size:
-         value: (blocks_size_raw & 0x00ffffff)
+         value: (blocks_offset & 0x00ffffff)
   table:
     seq:
-      - id: item_size
+      - id: size
         type: u2
-      - id: items
+      - id: numitems
         type: u2
-      - id: unknown
-        size: 2
-      - id: begin
+      - id: flags
+        type: u2
+      - id: start
         type: u4
   header_variables:
     seq:
@@ -182,7 +256,7 @@ types:
         doc: 0x00c8-0x00da, $VIEWCTRL/10|20|30
       - id: view_size
         type: f8
-        doc: 0x00e0-0x00e7
+        doc: 0x00e0-0x00e7, $VIEWSIZE/40
       - id: snap
         type: s2
         doc: 0x00e8-0x00e9, $SNAPMODE
@@ -236,11 +310,11 @@ types:
         type: s2
         doc: 0x014a-0x014b, $CLAYER
       - id: current_color_convert
-        type: s2
-        doc: 0x014c-0x014d, (2, 3, 8, 15 - default)
-      - id: unknown6
         type: f8
-        doc: 0x014e-0x0155
+        doc: 0x014c-0x0153
+      - id: unknown6
+        type: u2
+        doc: 0x0154-0x0155
       - id: psltscale
         type: u2
         doc: 0x0156-0x0157, $PSLTSCALE/70
@@ -271,7 +345,7 @@ types:
         doc: 0x017a-0x0181, $SKETCHINC
       - id: fillet_radius
         type: f8
-        doc: $FILETRAD
+        doc: $FILLETRAD/40
       - id: units_for_angles
         enum: units_for_angles
         type: s2
@@ -286,10 +360,10 @@ types:
         enum: osnap_modes
         type: s2
         doc: 0x0190-0x0191, $OSMODE
-      - id: attributes
-        enum: attributes
+      - id: att_visibility
+        enum: att_visibility
         type: s2
-        doc: 0x0192-0x0193, $ATTMODE
+        doc: 0x0192-0x0193, $ATTMODE/70
       - id: menu
         size: 15
         type: str
@@ -351,8 +425,51 @@ types:
         enum: limits_check
         type: s2
         doc: 0x01fa-0x01fb, $LIMCHECK
-      - id: unknown10
-        size: 45
+      - id: unknown10a
+        type: u1
+        doc: 0x01fc
+      - id: unknown10b
+        type: u1
+      - id: unknown10c
+        type: u1
+      - id: unknown10d
+        type: u1
+      - id: unknown10e
+        type: u1
+      - id: unknown10f
+        type: u1
+      - id: unknown10g
+        type: f8
+      - id: unknown10h
+        type: u1
+      - id: unknown10i
+        type: u1
+      - id: unknown10j
+        type: u1
+      - id: unknown10k
+        type: u1
+      - id: unknown10l
+        type: u1
+      - id: unknown10m
+        type: u1
+      - id: unknown10n
+        type: u1
+      - id: unknown10o
+        type: u1
+      - id: unknown10p
+        type: f8
+      - id: unknown10q
+        type: f8
+      - id: unknown10r
+        type: u2
+      - id: unknown10s
+        type: u2
+      - id: unknown10t
+        type: u1
+      - id: unknown10u
+        type: u1
+      - id: unknown10v
+        type: u1
       - id: elevation
         type: f8
         doc: 0x0229-0x0230, $ELEVATION
@@ -362,49 +479,15 @@ types:
       - id: view_point
         type: point_3d
         doc: 0x0239-0x0251, $VIEWDIR/10|20|30
-      - id: unknown11
-        type: f8
-      - id: unknown12
-        type: f8
-      - id: unknown13
-        type: f8
-      - id: unknown14
-        type: f8
-      - id: unknown15
-        type: f8
-      - id: unknown16
-        type: f8
-      - id: unknown17
-        type: f8
-      - id: unknown18
-        type: f8
-      - id: unknown19
-        type: f8
-      - id: unknown20
-        type: f8
-      - id: unknown21
-        type: f8
-      - id: unknown22
-        type: f8
-      - id: unknown23
-        type: f8
-      - id: unknown24
-        type: f8
-      - id: unknown25
-        type: f8
-      - id: unknown26
-        type: f8
-      - id: unknown27
-        type: f8
-      - id: unknown28
-        type: f8
+      - id: unknown_repeating
+        type: unknown_repeating
+        doc: 0x0252-0x02e0
       - id: unknown29
-        size: 2
+        type: s2
+        doc: 0x02e1-0x02e2
       - id: blip
-        type: s1
-        doc: 0x02e3, $BLIPMODE, TODO s1 or s2?
-      - id: unknown29a
-        size: 1
+        type: s2
+        doc: 0x02e3-0x02e4, $BLIPMODE
       - id: dim_suppression_of_zeros
         type: s1
         doc: 0x02e5, $DIMZIN
@@ -415,13 +498,11 @@ types:
         type: f8
         doc: 0x02ee-0x02f5, $DIMDLE
       - id: dim_arrowhead_block
-        size: 32
+        size: 33
         type: str
         encoding: ASCII
         terminator: 0x00
         doc: $DIMBLK
-      - id: unknown30
-        type: s1
       - id: circle_zoom_percent
         type: s2
         doc: 0x0317-0x0318
@@ -464,20 +545,16 @@ types:
         type: s2
         doc: 0x033f-0x0340, $USRTIMER
       - id: fast_zoom
-        type: s1
-        doc: 0x0341, $FASTZOOM
-      - id: unknown33
-        size: 1
+        type: u2
+        doc: 0x0341-0x0342, $FASTZOOM/70
       - id: sketch_type
-        type: s1
-        doc: 0x0343, $SKPOLY
-      - id: unknown33b
-        size: 7
-      - id: unknown34
-        type: f8
+        type: u2
+        doc: 0x0343-0x0344, $SKPOLY
+      - id: unknown_date
+        type: unknown_date
       - id: angle_base
         type: f8
-        doc: 0x0353-0x035a, $ANGBASE
+        doc: 0x0353-0x035a, $ANGBASE/50
       - id: angle_direction
         enum: angle_direction
         type: s2
@@ -557,16 +634,18 @@ types:
       - id: spline_frame
         type: s2
         doc: 0x03d7-0x03d8, $SPLFRAME
-      - id: unknown31b
-        type: s2
-      - id: unknown31c
-        type: s2
+      - id: att_prompting_during_insert
+        type: u2
+        doc: 0x03d9-0x03da, $ATTREQ/70
+      - id: att_entry_dialogs
+        type: u2
+        doc: 0x03db-0x03dc, $ATTDIA/70
       - id: chamfera
         type: f8
-        doc: $CHAMFERA/40
+        doc: 0x03dd-0x04e4, $CHAMFERA/40
       - id: chamferb
         type: f8
-        doc: $CHAMFERB/40
+        doc: 0x04e5-0x04ec, $CHAMFERB/40
       - id: mirror_text
         type: s2
         doc: 0x03ed-0x03ee, $MIRRTEXT
@@ -583,44 +662,267 @@ types:
       - id: ucs_y_dir
         type: point_3d
         doc: $UCSYDIR/12|22|32 ~ $UCSYORI
-      - id: unknown38
+      - id: target
+        type: point_3d
+        doc: $TARGET
+      - id: lens_length
         type: f8
-      - id: unknown39
+        doc: $LENSLENGTH
+      - id: view_rotation_angle_radians
         type: f8
-      - id: unknown40
+        doc: $VIEWTWIST
+      - id: frontz_z
         type: f8
-      - id: unknown41
+        doc: $FRONTZ
+      - id: backz_z
         type: f8
-      - id: unknown42
-        size: 26
-      - id: unknown43
+        doc: $BACKZ
+      - id: view_mode
+        type: u2
+        doc: $VIEWMODE
+      - id: dim_tofl
         type: u1
-        doc: 0x047d, TODO libredwg DIMTOFL
-      - id: unknown44
-        size: 130
+        doc: 0x047d, $DIMTOFL
+      - id: dim_arrowhead_block1
+        size: 33
+        type: str
+        encoding: ASCII
+        terminator: 0x00
+        doc: $DIMBLK1
+      - id: dim_arrowhead_block2
+        size: 33
+        type: str
+        encoding: ASCII
+        terminator: 0x00
+        doc: $DIMBLK2
+      - id: dim_arrowhead_blocks_control
+        type: u1
+        doc: $DIMSAH
+      - id: dim_text_between_ext_lines
+        type: u1
+        doc: $DIMTIX
+      - id: dim_arrowhead_suppress
+        type: u1
+        doc: $DIMSOXD
+      - id: dim_text_vertical_position_size
+        type: f8
+        doc: $DIMTVP
+      - id: unknown_string
+        size: 33
+        type: str
+        encoding: ASCII
+        terminator: 0x00
+      - id: handling
+        type: u2
+        doc: $HANDLING
+      - id: handseed
+        type: u8be
+        doc: $HANDSEED, in hex
+      - id: surfu
+        type: u2
+        doc: $SURFU
+      - id: surfv
+        type: u2
+        doc: $SURFV
+      - id: surftype
+        type: u2
+        doc: $SURFTYPE
+      - id: surftab1
+        type: u2
+        doc: $SURFTAB1
+      - id: surftab2
+        type: u2
+        doc: $SURFTAB2
       - id: table_vport
         type: table
-      - id: unknown45
+      - id: flatland
         type: u2
+        doc: 0x050a-0x050b, $FLATLAND
       - id: spline_type
         type: u2
+        enum: spline_type
         doc: 0x050c-0x050d, $SPLINETYPE
-      - id: unknown46
+      - id: ucs_icon
         type: u2
+        doc: $UCSICON
       - id: unknown47
         type: u2
       - id: table_appid
         type: table
         doc: 0x0512-0x051c
-      - id: unknown48
+      - id: world_view
         type: u2
-      - id: unknown49
-        size: 433
+        doc: 0x051d-0x051e, $WORLDVIEW/70
+      - id: unknown49a
+        type: u2
+      - id: unknown49b
+        type: u2
+      - id: table_dimstyle
+        type: table
+      - id: unknown49c
+        size: 5
+      - id: dim_line_color
+        type: u2
+        doc: $DIMCLRD_C/70
+      - id: dim_clre_c
+        type: u2
+        doc: $DIMCLRE_C/70
+      - id: dim_clrt_c
+        type: u2
+        doc: $DIMCLRT_C/70
+      - id: shade_edge
+        type: u2
+        doc: $SHADEDGE/70
+      - id: shade_dif
+        type: u2
+        doc: $SHADEDIF/70
+      - id: unit_mode
+        type: u2
+        doc: $UNITMODE/70
+      - id: unknown50
+        size: 10
+      - id: unknown51
+        type: f8
+      - id: unknown52
+        type: f8
+      - id: unknown53
+        type: f8
+      - id: unknown_unit1
+        size: 32
+        type: str
+        encoding: ASCII
+        terminator: 0x00
+      - id: unknown_unit2
+        size: 32
+        type: str
+        encoding: ASCII
+        terminator: 0x00
+      - id: unknown_unit3
+        size: 32
+        type: str
+        encoding: ASCII
+        terminator: 0x00
+      - id: unknown_unit4
+        size: 32
+        type: str
+        encoding: ASCII
+        terminator: 0x00
+      - id: dim_tfac
+        type: f8
+        doc: $DIMTFAC/40
+      - id: p_ucs_org
+        type: point_3d
+        doc: $PUCSORG/10
+      - id: p_ucs_xdir
+        type: point_3d
+        doc: $PUCSXDIR/11
+      - id: p_ucs_ydir
+        type: point_3d
+        doc: $PUCSXDIR/12
+      - id: unknown55
+        type: u2
+      - id: tile_mode
+        type: u1
+        doc: $TILEMODE/70
+      - id: plim_check
+        type: u2
+        doc: $PLIMCHECK/70
+      - id: unknown56
+        type: u2
+      - id: unknown57
+        type: u1
+      - id: p_ext_min
+        type: point_3d
+        doc: $PEXTMIN/10
+      - id: p_ext_max
+        type: point_3d
+        doc: $PEXTMAX/10
+      - id: p_lim_min
+        type: point_2d
+        doc: $PLIMMIN/10
+      - id: p_lim_max
+        type: point_2d
+        doc: $PLIMMAX/10
+      - id: p_insertion_base
+        type: point_3d
+        doc: $PINSBASE/10|20|30
+      - id: table_vx
+        type: table
+        doc: 0x069f-0x06a8
+      - id: max_actvp
+        type: u2
+        doc: $MAXACTVP/70
+      - id: dim_gap
+        type: f8
+        doc: $DIMGAP/40
+      - id: p_elevation
+        type: f8
+        doc: $PELEVATION/40
+      - id: vis_retain
+        type: u2
+        doc: $VISRETAIN/70
+      - id: unknown59
+        size: 18
+        doc: 7ef
     instances:
       create_date:
         value: create_date_days + (create_date_ms / 86400000.0)
       update_date:
         value: update_date_days + (update_date_ms / 86400000.0)
+  unknown_repeating:
+    seq:
+      - id: unknown_repeating1
+        type: f8
+      - id: unknown_repeating2
+        type: f8
+      - id: unknown_repeating3
+        type: f8
+      - id: unknown_repeating4
+        type: f8
+      - id: unknown_repeating5
+        type: f8
+      - id: unknown_repeating6
+        type: f8
+      - id: unknown_repeating7
+        type: f8
+      - id: unknown_repeating8
+        type: f8
+      - id: unknown_repeating9
+        type: f8
+      - id: unknown_repeating10
+        type: f8
+      - id: unknown_repeating11
+        type: f8
+      - id: unknown_repeating12
+        type: f8
+      - id: unknown_repeating13
+        type: f8
+      - id: unknown_repeating14
+        type: f8
+      - id: unknown_repeating15
+        type: f8
+      - id: unknown_repeating16
+        type: f8
+      - id: unknown_repeating17
+        type: f8
+      - id: unknown_repeating18
+        type: f8
+  unknown_date:
+    seq:
+      - id: month
+        type: u2
+      - id: day
+        type: u2
+      - id: year
+        type: u2
+      - id: hour
+        type: u2
+      - id: minute
+        type: u2
+      - id: second
+        type: u2
+      - id: ms
+        type: u2
   entity:
     seq:
       - id: entity_type
@@ -651,13 +953,13 @@ types:
             _: entity_tmp
   entity_mode:
     seq:
-      - id: entity_mode1
+      - id: entity_xdata
         type: b1
-      - id: entity_mode2
+      - id: entity_xref_resolved
         type: b1
-      - id: entity_mode3
+      - id: entity_xref_ref
         type: b1
-      - id: entity_mode4
+      - id: entity_xref_dep
         type: b1
       - id: entity_thickness_flag
         type: b1
@@ -718,6 +1020,12 @@ types:
       - id: entity_thickness
         type: f8
         if: entity_mode.entity_thickness_flag
+      - id: xdata_size
+        type: u1
+        if: entity_mode.entity_xdata
+      - id: xdata
+        size: xdata_size
+        if: entity_mode.entity_xdata
   entity_arc:
     seq:
       - id: entity_common
@@ -773,14 +1081,14 @@ types:
         type: f8
         if: entity_common.flag2_6
         doc: ATTDEF/41
-      - id: unknown_index
+      - id: generation
         type: u1
         if: entity_common.flag2_4
-      - id: flags2
-        type: attdef_flags2
+      - id: horiz_alignment
+        type: u1
         if: entity_common.flag2_2
         doc: ATTDEF/72
-      - id: end_point
+      - id: alignment_point
         type: point_2d
         if: entity_common.flag2_1
         doc: ATTDEF/11|21
@@ -1034,15 +1342,20 @@ types:
         type: entity_common
       - id: x
         type: f8
+        doc: SHAPE/10
       - id: y
         type: f8
+        doc: SHAPE/20
       - id: height
         type: f8
+        doc: SHAPE/40
       - id: item_num
         type: u1
-      - id: angle
+        doc: SHAPE/2
+      - id: angle_in_radians
         type: f8
         if: entity_common.flag2_8
+        doc: SHAPE/50
       - id: load_num
         type: u1
   entity_solid:
@@ -1125,25 +1438,6 @@ types:
         type: b1
       - id: verify
         type: b1
-  attdef_flags2:
-    seq:
-## TODO Tohle je divne
-      - id: flag_1
-        type: b1
-      - id: flag_2
-        type: b1
-      - id: flag_3
-        type: b1
-      - id: flag_4
-        type: b1
-      - id: flag_5
-        type: b1
-      - id: middle
-        type: b1
-      - id: right
-        type: b1
-      - id: center
-        type: b1
   layer:
     seq:
       - id: flag
@@ -1216,6 +1510,8 @@ types:
         doc: LTYPE/49
       - id: unknown
         type: s1
+      - id: unknown2
+        size: 27
   pattern:
     seq:
       - id: pattern1
@@ -1261,62 +1557,62 @@ types:
         repeat: eos
   style:
     seq:
-      - id: flag1_1
-        type: b1
-      - id: flag1_2
-        type: b1
-      - id: flag1_3
-        type: b1
-      - id: flag1_4
-        type: b1
-      - id: flag1_5
-        type: b1
-      - id: flag1_vertical
-        type: b1
-      - id: flag1_7
-        type: b1
-      - id: flag1_8
-        type: b1
-      - id: text
-        size: 31
+      - id: flag
+        type: style_flag
+        doc: STYLE/70
+      - id: style_name
+        size: 32
         type: str
         encoding: ASCII
-        terminator: 0x2e
+        terminator: 0x00
+        doc: STYLE/2
       - id: height
         type: f8
         doc: STYLE/40
-      - id: unknown1
-        type: u1
       - id: width_factor
         type: f8
         doc: STYLE/41
       - id: obliquing_angle_in_radians
         type: f8
         doc: STYLE/50
-      - id: flag2_1
-        type: b1
+      - id: generation
+        type: generation_flags
         doc: STYLE/71
-      - id: flag2_2
-        type: b1
-      - id: flag2_3
-        type: b1
-      - id: flag2_4
-        type: b1
-      - id: flag2_5
-        type: b1
-      - id: flag2_upside_down
-        type: b1
-      - id: flag2_backwards
-        type: b1
-      - id: flag2_8
-        type: b1
-      - id: u12
+      - id: last_height
         type: f8
         doc: STYLE/42
       - id: font_file
-        size: 90
-      - id: u13
-        size: 38
+        size: 64
+        type: str
+        encoding: ASCII
+        terminator: 0x00
+        doc: STYLE/3
+      - id: bigfont_file
+        size: 64
+        type: str
+        encoding: ASCII
+        terminator: 0x00
+        doc: STYLE/4
+      - id: unknown
+        size: 4
+  style_flag:
+    seq:
+      - id: flag1
+        type: b1
+      - id: flag2
+        type: b1
+      - id: flag3
+        type: b1
+      - id: flag4
+        type: b1
+      - id: flag5
+        type: b1
+      - id: vertical
+        type: b1
+      - id: flag7
+        type: b1
+      - id: load
+        type: b1
   view:
     seq:
       - id: u1
@@ -1462,6 +1758,8 @@ types:
       - id: vport_15_25
         type: point_2d
         doc: VPORT/15|25
+      - id: u17
+        size: 4
   vport_flag:
     seq:
       - id: deleted
@@ -1491,6 +1789,8 @@ types:
         encoding: ASCII
         terminator: 0x00
         doc: APPID/2
+      - id: u1
+        size: 4
   appid_flag:
     seq:
       - id: flag1
@@ -1506,6 +1806,86 @@ types:
       - id: flag6
         type: b1
       - id: flag7
+        type: b1
+      - id: flag8
+        type: b1
+  dimstyle:
+    seq:
+      - id: flag
+        type: dimstyle_flag
+        doc: DIMSTYLE/70
+      - id: dimstyle_name
+        size: 32
+        type: str
+        encoding: ASCII
+        terminator: 0x00
+        doc: DIMSTYLE/2
+      - id: u1
+        size: 291
+  dimstyle_flag:
+    seq:
+      - id: flag1
+        type: b1
+      - id: flag2
+        type: b1
+      - id: flag3
+        type: b1
+      - id: flag4
+        type: b1
+      - id: flag5
+        type: b1
+      - id: flag6
+        type: b1
+      - id: flag7
+        type: b1
+      - id: flag8
+        type: b1
+  vx:
+    seq:
+      - id: flag
+        type: vx_flag
+        doc: APPID/70
+      - id: vx_name
+        size: 32
+        type: str
+        encoding: ASCII
+        terminator: 0x00
+        doc: VX/2
+      - id: u1
+        size: 4
+  vx_flag:
+    seq:
+      - id: flag1
+        type: b1
+      - id: flag2
+        type: b1
+      - id: flag3
+        type: b1
+      - id: flag4
+        type: b1
+      - id: flag5
+        type: b1
+      - id: flag6
+        type: b1
+      - id: flag7
+        type: b1
+      - id: flag8
+        type: b1
+  generation_flags:
+    seq:
+      - id: flag1
+        type: b1
+      - id: flag2
+        type: b1
+      - id: flag3
+        type: b1
+      - id: flag4
+        type: b1
+      - id: flag5
+        type: b1
+      - id: upside_down
+        type: b1
+      - id: backwards
         type: b1
       - id: flag8
         type: b1
@@ -1548,6 +1928,7 @@ enums:
     # NOT_USED 21: line3d
     22: face3d
     23: dim
+    # TODO 24: viewport
   osnap_modes:
     0: none
     1: endpoint
@@ -1582,10 +1963,10 @@ enums:
     0: absolute_coordinates
     1: absolute_coordinates_realtime
     2: relative_polar_coordinates
-  attributes:
+  att_visibility:
     0: off
     1: normal
-    2: on
+    2: all
   current_color:
     0: byblock
     1: red
@@ -1600,3 +1981,6 @@ enums:
     0: left
     1: top
     2: right
+  spline_type:
+    5: quadratic_b_spline
+    6: cubic_b_spline
