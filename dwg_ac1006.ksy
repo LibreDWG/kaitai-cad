@@ -801,37 +801,37 @@ types:
         type: s1
       - id: flag1
         type: s1
-      - id: flag2_1
+      - id: opt2_128
         type: b1
-      - id: flag2_2
+      - id: opt2_64
         type: b1
-      - id: flag2_3
+      - id: opt2_32
         type: b1
-      - id: flag2_4
+      - id: opt2_16
         type: b1
-      - id: flag2_5
+      - id: opt2_8
         type: b1
-      - id: flag2_6
+      - id: opt2_4
         type: b1
-      - id: flag2_7
+      - id: opt2_2
         type: b1
-      - id: flag2_8
+      - id: opt2_1
         type: b1
-      - id: flag3_1
+      - id: opt3_128
         type: b1
-      - id: flag3_2
+      - id: opt3_64
         type: b1
-      - id: flag3_3
+      - id: opt3_32
         type: b1
-      - id: flag3_4
+      - id: opt3_16
         type: b1
-      - id: flag3_5
+      - id: opt3_8
         type: b1
-      - id: flag3_6
+      - id: opt3_4
         type: b1
-      - id: flag3_7
+      - id: opt3_2
         type: b1
-      - id: flag3_8
+      - id: opt3_1
         type: b1
       - id: entity_color
         type: s1
@@ -873,7 +873,7 @@ types:
         doc: ARC/51
       - id: extrusion_direction
         type: point_3d
-        if: entity_common.flag2_8
+        if: entity_common.opt2_1
         doc: ARC/210|220|230
   entity_attdef:
     seq:
@@ -914,22 +914,22 @@ types:
         doc: ATTDEF/70
       - id: rotation_angle_in_radians
         type: f8
-        if: entity_common.flag2_7
+        if: entity_common.opt2_2
         doc: ATTDEF/50
       - id: width_scale_factor
         type: f8
-        if: entity_common.flag2_6
+        if: entity_common.opt2_4
         doc: ATTDEF/41
       - id: unknown_index
         type: u1
-        if: entity_common.flag2_4
+        if: entity_common.opt2_16
       - id: flags2
         type: attdef_flags2
-        if: entity_common.flag2_2
+        if: entity_common.opt2_64
         doc: ATTDEF/72
       - id: end_point
         type: point_2d
-        if: entity_common.flag2_1
+        if: entity_common.opt2_128
         doc: ATTDEF/11|21
   entity_attrib:
     seq:
@@ -958,18 +958,18 @@ types:
         type: u1
       - id: u5
         type: f8
-        if: entity_common.flag2_7
+        if: entity_common.opt2_2
         doc: ATRRIB/50
       - id: u6
         type: u1
-        if: entity_common.flag2_4
+        if: entity_common.opt2_16
       - id: u7
         type: u1
-        if: entity_common.flag2_2
+        if: entity_common.opt2_64
         # 1, 2 nebo 7?
       - id: aligned_to
         type: point_2d
-        if: entity_common.flag2_1
+        if: entity_common.opt2_128
         doc: ATTRIB/11|21
   entity_block_begin:
     seq:
@@ -1002,39 +1002,39 @@ types:
         if: entity_common.entity_mode.entity_elevation_flag == true
       - id: x_scale
         type: f8
-        if: entity_common.flag2_8
+        if: entity_common.opt2_1
         doc: INSERT/41
       - id: y_scale
         type: f8
-        if: entity_common.flag2_7
+        if: entity_common.opt2_2
         doc: INSERT/42
       - id: rotation_angle_in_radians
         type: f8
-        if: entity_common.flag2_6
+        if: entity_common.opt2_4
         doc: INSERT/50
       - id: z_scale
         type: f8
-        if: entity_common.flag2_5
+        if: entity_common.opt2_8
         doc: INSERT/43
       - id: columns
         type: u2
-        if: entity_common.flag2_4
+        if: entity_common.opt2_16
         doc: INSERT/70
       - id: rows
         type: u2
-        if: entity_common.flag2_3
+        if: entity_common.opt2_32
         doc: INSERT/71
       - id: column_spacing
         type: f8
-        if: entity_common.flag2_2
+        if: entity_common.opt2_64
         doc: INSERT/44
       - id: row_spacing
         type: f8
-        if: entity_common.flag2_1
+        if: entity_common.opt2_128
         doc: INSERT/45
       - id: extrusion_direction
         type: point_3d
-        if: entity_common.flag3_8
+        if: entity_common.opt3_1
         doc: INSERT/210|220|230
   entity_circle:
     seq:
@@ -1075,64 +1075,64 @@ types:
 #        doc: DIMENSION/31
       - id: unknown1
         type: u1
-        if: entity_common.flag2_7
+        if: entity_common.opt2_2
         doc: DIMENSION/70
       - id: text_size
         type: s2
-        if: entity_common.flag2_6
+        if: entity_common.opt2_4
       - id: text
         size: text_size
-        if: entity_common.flag2_6
+        if: entity_common.opt2_4
         doc: DIMENSION/1
       - id: extension_defining_point1
         type: point_2d
-        if: entity_common.flag2_5
+        if: entity_common.opt2_8
         doc: DIMENSION/13|23
       - id: extension_defining_point1_z
         type: f8
         if: |
           entity_common.entity_mode.entity_elevation_flag == false
-          and entity_common.flag2_5
+          and entity_common.opt2_8
         doc: DIMENSION/33
       - id: extension_defining_point2
         type: point_2d
-        if: entity_common.flag2_4
+        if: entity_common.opt2_16
         doc: DIMENSION/14|24
       - id: extension_defining_point2_z
         type: f8
         if: |
           entity_common.entity_mode.entity_elevation_flag == false
-          and entity_common.flag2_4
+          and entity_common.opt2_16
         doc: DIMENSION/34
       - id: defining_point
         type: point_2d
-        if: entity_common.flag2_3
+        if: entity_common.opt2_32
         doc: DIMENSION/15|25
       - id: defining_point_z
         type: f8
         if: |
           entity_common.entity_mode.entity_elevation_flag == false
-          and entity_common.flag2_3
+          and entity_common.opt2_32
         doc: DIMENSION/35
       - id: dimension_line_arc_definition_point
         type: point_2d
-        if: entity_common.flag2_2
+        if: entity_common.opt2_64
       - id: dimension_line_arc_definition_point_z
         type: f8
         if: |
           entity_common.entity_mode.entity_elevation_flag == false
-          and entity_common.flag2_2
+          and entity_common.opt2_64
       - id: unknown2
         type: point_2d
-        if: entity_common.flag2_1
+        if: entity_common.opt2_128
       - id: unknown2_z
         type: f8
         if: |
           entity_common.entity_mode.entity_elevation_flag == false
-          and entity_common.flag2_1
+          and entity_common.opt2_128
       - id: rotation_in_radians
         type: f8
-        if: entity_common.flag3_8
+        if: entity_common.opt3_1
   entity_face3d:
     seq:
       - id: entity_common
@@ -1143,28 +1143,28 @@ types:
         type: f8
       - id: first_point_z
         type: f8
-        if: entity_common.flag2_8
+        if: entity_common.opt2_1
       - id: second_point_x
         type: f8
       - id: second_point_y
         type: f8
       - id: second_point_z
         type: f8
-        if: entity_common.flag2_7
+        if: entity_common.opt2_2
       - id: third_point_x
         type: f8
       - id: third_point_y
         type: f8
       - id: third_point_z
         type: f8
-        if: entity_common.flag2_6
+        if: entity_common.opt2_4
       - id: fourth_point_x
         type: f8
       - id: fourth_point_y
         type: f8
       - id: fourth_point_z
         type: f8
-        if: entity_common.flag2_5
+        if: entity_common.opt2_8
   entity_line:
     seq:
       - id: entity_common
@@ -1191,7 +1191,7 @@ types:
         doc: LINE/31
       - id: extrusion_direction
         type: point_3d
-        if: entity_common.flag2_8
+        if: entity_common.opt2_1
         doc: LINE/210|220|230
   entity_line3d:
     seq:
@@ -1217,7 +1217,7 @@ types:
         doc: 3DLINE/31
       - id: extrusion_direction
         type: point_3d
-        if: entity_common.flag2_8
+        if: entity_common.opt2_1
         doc: 3DLINE/210|220|230
   entity_tmp:
     seq:
@@ -1229,37 +1229,37 @@ types:
         type: s1
       - id: flag1
         type: s1
-      - id: flag2_1
+      - id: opt2_128
         type: b1
-      - id: flag2_2
+      - id: opt2_64
         type: b1
-      - id: flag2_3
+      - id: opt2_32
         type: b1
-      - id: flag2_4
+      - id: opt2_16
         type: b1
-      - id: flag2_5
+      - id: opt2_8
         type: b1
-      - id: flag2_6
+      - id: opt2_4
         type: b1
-      - id: flag2_7
+      - id: opt2_2
         type: b1
-      - id: flag2_8
+      - id: opt2_1
         type: b1
-      - id: flag3_1
+      - id: opt3_128
         type: b1
-      - id: flag3_2
+      - id: opt3_64
         type: b1
-      - id: flag3_3
+      - id: opt3_32
         type: b1
-      - id: flag3_4
+      - id: opt3_16
         type: b1
-      - id: flag3_5
+      - id: opt3_8
         type: b1
-      - id: flag3_6
+      - id: opt3_4
         type: b1
-      - id: flag3_7
+      - id: opt3_2
         type: b1
-      - id: flag3_8
+      - id: opt3_1
         type: b1
       - id: xxx
         size: entity_size - 8
@@ -1283,15 +1283,15 @@ types:
         type: entity_common
       - id: closed
         type: u1
-        if: entity_common.flag2_8
+        if: entity_common.opt2_1
         doc: POLYLINE/66
       - id: x
         type: f8
-        if: entity_common.flag2_7
+        if: entity_common.opt2_2
         doc: POLYLINE/40
       - id: y
         type: f8
-        if: entity_common.flag2_6
+        if: entity_common.opt2_4
         doc: POLYLINE/41
   entity_seqend:
     seq:
@@ -1317,7 +1317,7 @@ types:
         doc: SHAPE/2
       - id: angle_in_radians
         type: f8
-        if: entity_common.flag2_8
+        if: entity_common.opt2_1
         doc: SHAPE/50
       - id: load_num
         type: u1
@@ -1356,32 +1356,32 @@ types:
         doc: TEXT/1
       - id: angle
         type: f8
-        if: entity_common.flag2_8
+        if: entity_common.opt2_1
         doc: TEXT/50
       - id: width_factor
         type: f8
-        if: entity_common.flag2_7
+        if: entity_common.opt2_2
         doc: TEXT/41
       - id: obliquing_angle
         type: f8
-        if: entity_common.flag2_6
+        if: entity_common.opt2_4
         doc: TEXT/51
       - id: style_index
         type: u1
-        if: entity_common.flag2_5
+        if: entity_common.opt2_8
         doc: TEXT/7
       - id: generation
         type: generation_flags
-        if: entity_common.flag2_4
+        if: entity_common.opt2_16
         doc: TEXT/71
       - id: type
         enum: text_type
         type: u1
-        if: entity_common.flag2_3
+        if: entity_common.opt2_32
         doc: TEXT/72
       - id: aligned_to
         type: point_2d
-        if: entity_common.flag2_2
+        if: entity_common.opt2_64
         doc: TEXT/11|21
   entity_trace:
     seq:
@@ -1407,20 +1407,20 @@ types:
         doc: VERTEX/20
       - id: width
         type: f8
-        if: entity_common.flag2_8
+        if: entity_common.opt2_1
       - id: unknown1
         type: f8
-        if: entity_common.flag2_7
+        if: entity_common.opt2_2
       - id: bulge
         type: f8
-        if: entity_common.flag2_6
+        if: entity_common.opt2_4
         doc: VERTEX/42
       - id: unknown2
         type: u1
-        if: entity_common.flag2_5
+        if: entity_common.opt2_8
       - id: unknown_in_radians
         type: f8
-        if: entity_common.flag2_4
+        if: entity_common.opt2_16
         doc: VERTEX/50
   attdef_flags:
     seq:
