@@ -605,13 +605,13 @@ types:
             _: entity_tmp
   entity_mode:
     seq:
-      - id: entity_mode1
+      - id: entity_xdata
         type: b1
-      - id: entity_mode2
+      - id: entity_xref_resolved
         type: b1
-      - id: entity_mode3
+      - id: entity_xref_ref
         type: b1
-      - id: entity_mode4
+      - id: entity_xref_dep
         type: b1
       - id: entity_thickness_flag
         type: b1
@@ -1109,15 +1109,15 @@ types:
         doc: VERTEX/50
   attdef_flags:
     seq:
-      - id: flag_1
+      - id: flag128
         type: b1
-      - id: flag_2
+      - id: flag64
         type: b1
-      - id: flag_3
+      - id: flag32
         type: b1
-      - id: flag_4
+      - id: flag16
         type: b1
-      - id: flag_5
+      - id: flag8
         type: b1
       - id: invisible
         type: b1
@@ -1127,16 +1127,16 @@ types:
         type: b1
   attdef_flags2:
     seq:
-## TODO Tohle je divne
-      - id: flag_1
+      ## TODO Tohle je divne
+      - id: flag128
         type: b1
-      - id: flag_2
+      - id: flag64
         type: b1
-      - id: flag_3
+      - id: flag32
         type: b1
-      - id: flag_4
+      - id: flag16
         type: b1
-      - id: flag_5
+      - id: flag8
         type: b1
       - id: middle
         type: b1
@@ -1165,19 +1165,19 @@ types:
         type: s1
   layer_flag:
     seq:
-      - id: flag1
+      - id: flag128
         type: b1
-      - id: flag2
+      - id: xref_ref
         type: b1
-      - id: flag3
+      - id: xref_resolved
         type: b1
-      - id: flag4
+      - id: xref_dep
         type: b1
-      - id: flag5
+      - id: flag8
         type: b1
-      - id: flag6
+      - id: locked
         type: b1
-      - id: flag7
+      - id: frozen_in_new
         type: b1
       - id: frozen
         type: b1
@@ -1240,21 +1240,21 @@ types:
         type: f8
   linetype_flag:
     seq:
-      - id: flag1
+      - id: flag128
         type: b1
-      - id: flag2
+      - id: xref_ref
         type: b1
-      - id: flag3
+      - id: xref_resolved
+        type: b1
+      - id: xref_dep
+        type: b1
+      - id: flag8
         type: b1
       - id: flag4
         type: b1
-      - id: flag5
+      - id: flag2
         type: b1
-      - id: flag6
-        type: b1
-      - id: flag7
-        type: b1
-      - id: frozen
+      - id: flag1
         type: b1
   real_entities:
     seq:
@@ -1301,21 +1301,21 @@ types:
         doc: STYLE/4
   style_flag:
     seq:
-      - id: flag1
+      - id: flag128
         type: b1
-      - id: flag2
+      - id: xref_ref
         type: b1
-      - id: flag3
+      - id: xref_resolved
         type: b1
-      - id: flag4
+      - id: xref_dep
         type: b1
-      - id: flag5
+      - id: flag8
         type: b1
       - id: vertical
         type: b1
-      - id: flag7
+      - id: flag2
         type: b1
-      - id: load
+      - id: shape
         type: b1
   view:
     seq:
@@ -1345,39 +1345,39 @@ types:
         type: u1
   view_flag:
     seq:
-      - id: flag1
+      - id: flag128
         type: b1
-      - id: flag2
+      - id: xref_ref
         type: b1
-      - id: flag3
+      - id: xref_resolved
         type: b1
-      - id: flag4
-        type: b1
-      - id: flag5
-        type: b1
-      - id: flag6
-        type: b1
-      - id: flag7
+      - id: xref_dep
         type: b1
       - id: flag8
         type: b1
-  generation_flags:
-    seq:
-      - id: flag1
+      - id: flag4
         type: b1
       - id: flag2
         type: b1
-      - id: flag3
+      - id: flag1
         type: b1
-      - id: flag4
+  generation_flags:
+    seq:
+      - id: flag128
         type: b1
-      - id: flag5
+      - id: flag64
+        type: b1
+      - id: flag32
+        type: b1
+      - id: flag16
+        type: b1
+      - id: flag8
         type: b1
       - id: upside_down
         type: b1
       - id: backwards
         type: b1
-      - id: flag8
+      - id: flag1
         type: b1
   point_2d:
     seq:

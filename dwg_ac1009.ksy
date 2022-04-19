@@ -1476,17 +1476,17 @@ types:
     seq:
       - id: flag128
         type: b1
-      - id: flag64
+      - id: xref_ref
         type: b1
-      - id: flag32
+      - id: xref_resolved
         type: b1
-      - id: flag16
+      - id: xref_dep
         type: b1
       - id: flag8
         type: b1
-      - id: flag4
+      - id: locked
         type: b1
-      - id: flag2
+      - id: frozen_in_new
         type: b1
       - id: frozen
         type: b1
@@ -1547,11 +1547,11 @@ types:
     seq:
       - id: flag128
         type: b1
-      - id: flag64
+      - id: xref_ref
         type: b1
-      - id: flag32
+      - id: xref_resolved
         type: b1
-      - id: flag16
+      - id: xref_dep
         type: b1
       - id: flag8
         type: b1
@@ -1559,7 +1559,7 @@ types:
         type: b1
       - id: flag2
         type: b1
-      - id: frozen
+      - id: flag1
         type: b1
   real_entities:
     seq:
@@ -1610,11 +1610,11 @@ types:
     seq:
       - id: flag128
         type: b1
-      - id: flag64
+      - id: xref_ref
         type: b1
-      - id: flag32
+      - id: xref_resolved
         type: b1
-      - id: flag16
+      - id: xref_dep
         type: b1
       - id: flag8
         type: b1
@@ -1622,7 +1622,7 @@ types:
         type: b1
       - id: flag2
         type: b1
-      - id: load
+      - id: shape
         type: b1
   view:
     seq:
@@ -1675,11 +1675,11 @@ types:
     seq:
       - id: flag128
         type: b1
-      - id: flag64
+      - id: xref_ref
         type: b1
-      - id: flag32
+      - id: xref_resolved
         type: b1
-      - id: flag16
+      - id: xref_dep
         type: b1
       - id: flag8
         type: b1
@@ -1775,11 +1775,11 @@ types:
     seq:
       - id: deleted
         type: b1
-      - id: flag64
+      - id: xref_ref
         type: b1
-      - id: flag32
+      - id: xref_resolved
         type: b1
-      - id: flag16
+      - id: xref_dep
         type: b1
       - id: flag8
         type: b1
@@ -1806,11 +1806,11 @@ types:
     seq:
       - id: flag128
         type: b1
-      - id: flag64
+      - id: xref_ref
         type: b1
-      - id: flag32
+      - id: xref_resolved
         type: b1
-      - id: flag16
+      - id: xref_dep
         type: b1
       - id: flag8
         type: b1
@@ -1818,7 +1818,7 @@ types:
         type: b1
       - id: flag2
         type: b1
-      - id: flag1
+      - id: no_xdata
         type: b1
   dimstyle:
     seq:
@@ -1837,11 +1837,11 @@ types:
     seq:
       - id: flag128
         type: b1
-      - id: flag64
+      - id: xref_ref
         type: b1
-      - id: flag32
+      - id: xref_resolved
         type: b1
-      - id: flag16
+      - id: xref_dep
         type: b1
       - id: flag8
         type: b1
@@ -1868,11 +1868,11 @@ types:
     seq:
       - id: flag128
         type: b1
-      - id: flag64
+      - id: xref_ref
         type: b1
-      - id: flag32
+      - id: xref_resolved
         type: b1
-      - id: flag16
+      - id: xref_dep
         type: b1
       - id: flag8
         type: b1

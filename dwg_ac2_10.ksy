@@ -472,13 +472,13 @@ types:
             _: entity_tmp
   entity_mode:
     seq:
-      - id: entity_mode1
+      - id: entity_xdata
         type: b1
-      - id: entity_mode2
+      - id: entity_xref_resolved
         type: b1
-      - id: entity_mode3
+      - id: entity_xref_ref
         type: b1
-      - id: entity_mode4
+      - id: entity_xref_dep
         type: b1
       - id: entity_thickness_flag
         type: b1
@@ -967,17 +967,17 @@ types:
     seq:
       - id: flag128
         type: b1
-      - id: flag64
+      - id: xref_ref
         type: b1
-      - id: flag32
+      - id: xref_resolved
         type: b1
-      - id: flag16
+      - id: xref_dep
         type: b1
       - id: flag8
         type: b1
-      - id: flag4
+      - id: locked
         type: b1
-      - id: flag2
+      - id: frozen_in_new
         type: b1
       - id: frozen
         type: b1
@@ -1040,11 +1040,11 @@ types:
     seq:
       - id: flag128
         type: b1
-      - id: flag64
+      - id: xref_ref
         type: b1
-      - id: flag32
+      - id: xref_resolved
         type: b1
-      - id: flag16
+      - id: xref_dep
         type: b1
       - id: flag8
         type: b1
@@ -1052,7 +1052,7 @@ types:
         type: b1
       - id: flag2
         type: b1
-      - id: frozen
+      - id: flag1
         type: b1
   real_entities:
     seq:

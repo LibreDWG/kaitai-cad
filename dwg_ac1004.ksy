@@ -608,13 +608,13 @@ types:
             _: entity_tmp
   entity_mode:
     seq:
-      - id: entity_mode1
+      - id: entity_xdata
         type: b1
-      - id: entity_mode2
+      - id: entity_xref_resolved
         type: b1
-      - id: entity_mode3
+      - id: entity_xref_ref
         type: b1
-      - id: entity_mode4
+      - id: entity_xref_dep
         type: b1
       - id: entity_thickness_flag
         type: b1
@@ -1313,13 +1313,13 @@ types:
       - id: is_xref_ref
         type: b1
         doc: bit 16
+      - id: flag8
+        type: b1
       - id: flag4
         type: b1
       - id: flag2
         type: b1
       - id: flag1
-        type: b1
-      - id: flag0
         type: b1
   real_entities:
     seq:

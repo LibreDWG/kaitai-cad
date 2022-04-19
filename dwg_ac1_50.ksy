@@ -505,13 +505,13 @@ types:
             _: entity_tmp
   entity_mode:
     seq:
-      - id: entity_mode1
+      - id: entity_xdata
         type: b1
-      - id: entity_mode2
+      - id: entity_xref_resolved
         type: b1
-      - id: entity_mode3
+      - id: entity_xref_ref
         type: b1
-      - id: entity_mode4
+      - id: entity_xref_dep
         type: b1
       - id: entity_thickness_flag
         type: b1
