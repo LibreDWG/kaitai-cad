@@ -4,15 +4,15 @@ meta:
   application: AutoCAD
   file-extension:
     - dwg
-  license: CC0-1.0
   xref:
     justsolve: DWG
-    pronom:
-      fmt: 24
     mime:
       - application/x-dwg
       - image/vnd.dwg
+    pronom:
+      fmt: 24
     wikidata: Q27863111
+  license: CC0-1.0
   endian: le
 seq:
   - id: header
@@ -102,6 +102,7 @@ types:
       - id: unknown1
         type: f8
         doc: 0x01d0-0x01d7
+        # r1_2 stops here
       - id: linear_units_format
         type: s2
         enum: unit_types
