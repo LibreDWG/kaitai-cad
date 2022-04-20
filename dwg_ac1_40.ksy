@@ -127,6 +127,9 @@ types:
       - id: fillet_radius
         type: f8
         doc: 0x01fa-0x0202
+    instances:
+      dwg_version:
+        value: 2
   entity:
     seq:
       - id: entity_type

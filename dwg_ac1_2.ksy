@@ -94,6 +94,9 @@ types:
       - id: unknown1
         type: f8
         doc: 0x01d0-0x01d7
+    instances:
+      dwg_version:
+        value: 0
   entity:
     seq:
       - id: entity_type
