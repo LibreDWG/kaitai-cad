@@ -25,61 +25,61 @@ seq:
   - id: blocks
     type: block
     repeat: expr
-    repeat-expr: header.table_block.numitems
+    repeat-expr: header.table_block.num_items
   - id: crc_blocks
     size: header.table_layer.start-_io.pos
   - id: layers
     type: layer
     repeat: expr
-    repeat-expr: header.table_layer.numitems
+    repeat-expr: header.table_layer.num_items
   - id: crc_layers
     size: header.table_style.start-_io.pos
   - id: styles
     type: style
     repeat: expr
-    repeat-expr: header.table_style.numitems
+    repeat-expr: header.table_style.num_items
   - id: crc_styles
     size: header.table_linetype.start-_io.pos
   - id: linetypes
     type: linetype
     repeat: expr
-    repeat-expr: header.table_linetype.numitems
+    repeat-expr: header.table_linetype.num_items
   - id: crc_linetypes
     size: header.table_view.start-_io.pos
   - id: views
     type: view
     repeat: expr
-    repeat-expr: header.table_view.numitems
+    repeat-expr: header.table_view.num_items
   - id: crc_views
     size: header.variables.table_ucs.start-_io.pos
   - id: ucss
     type: ucs
     repeat: expr
-    repeat-expr: header.variables.table_ucs.numitems
+    repeat-expr: header.variables.table_ucs.num_items
   - id: crc_ucss
     size: header.variables.table_vport.start-_io.pos
   - id: vports
     type: vport
     repeat: expr
-    repeat-expr: header.variables.table_vport.numitems
+    repeat-expr: header.variables.table_vport.num_items
   - id: crc_vports
     size: header.variables.table_appid.start-_io.pos
   - id: appids
     type: appid
     repeat: expr
-    repeat-expr: header.variables.table_appid.numitems
+    repeat-expr: header.variables.table_appid.num_items
   - id: crc_appids
     size: header.variables.table_dimstyle.start-_io.pos
   - id: dimstyles
     type: dimstyle
     repeat: expr
-    repeat-expr: header.variables.table_dimstyle.numitems
+    repeat-expr: header.variables.table_dimstyle.num_items
   - id: crc_dimstyles
     size: header.variables.table_vx.start-_io.pos
   - id: vxs
     type: vx
     repeat: expr
-    repeat-expr: header.variables.table_vx.numitems
+    repeat-expr: header.variables.table_vx.num_items
   - id: crc_vxs
     size: header.blocks_start-_io.pos
   - id: block_entities
@@ -117,21 +117,21 @@ types:
         type: f8
   block_flag:
     seq:
-      - id: none
+      - id: flag128
         type: b1
-      - id: anonymous_block
+      - id: referenced
         type: b1
-      - id: flag32
+      - id: xref_resolved
         type: b1
-      - id: flag16
+      - id: xref_dep
         type: b1
-      - id: flag8
+      - id: xref_overlaid
         type: b1
-      - id: flag4
+      - id: is_xref
         type: b1
-      - id: resolved_external_reference
+      - id: has_attrs
         type: b1
-      - id: references_external_reference
+      - id: anonymous
         type: b1
   block_flag2:
     seq:
@@ -226,7 +226,7 @@ types:
     seq:
       - id: size
         type: u2
-      - id: numitems
+      - id: num_items
         type: u2
       - id: flags
         type: u2

@@ -170,7 +170,7 @@ types:
       - id: view_size
         type: f8
         doc: 0x00e0-0x00e7
-      - id: snap
+      - id: snap_mode
         type: s2
         doc: 0x00e8-0x00e9, $SNAPMODE
       - id: snap_resolution
@@ -222,22 +222,25 @@ types:
       - id: celayer
         type: s2
         doc: 0x014a-0x014b, $CLAYER
-      - id: old_cecolor
-        type: f8
-        doc: 0x014c-0x0153
-      - id: unknown7a
+      - id: old_cecolor_lo
+        type: u4
+        doc: 0x014c-
+      - id: old_cecolor_hi
+        type: u4
+        doc: -0x0153
+      - id: psltscale
         size: 2
-        doc: 0x0154-0x0155
-      - id: unknown7b
+        doc: 0x0154-0x0155, $PSLTSCALE
+      - id: tree_depth
         size: 2
-        doc: 0x0156-0x0157
-      - id: unknown7c
+        doc: 0x0156-0x0157, $TREEDEPTH
+      - id: unknown_5
         size: 2
         doc: 0x0158-0x0159
-      - id: unknown7d
+      - id: unknown_6
         size: 2
         doc: 0x015a-0x015b
-      - id: unknown8
+      - id: unknown_7
         type: f8
         doc: 0x015c-0x0163
       - id: linear_units_format
@@ -247,7 +250,7 @@ types:
       - id: linear_units_precision
         type: s2
         doc: 0x0166-0x0167, $LUPREC
-      - id: axis
+      - id: axis_mode
         type: s2
         doc: 0x0168-0x0169, $AXISMODE/70
       - id: axis_value
@@ -355,7 +358,7 @@ types:
       - id: unknown29
         type: s2
         doc: 0x02e1-0x02e2
-      - id: blip
+      - id: blip_mode
         type: s2
         doc: 0x02e3-0x02e4, $BLIPMODE
       - id: dim_suppression_of_zeros
