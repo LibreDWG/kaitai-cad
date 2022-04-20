@@ -20,7 +20,7 @@ seq:
   - id: entities
     type: entity
     repeat: expr
-    repeat-expr: header.number_of_entities
+    repeat-expr: header.num_entities
 types:
   header:
     seq:
@@ -33,9 +33,9 @@ types:
       - id: insertion_base
         type: point_3d
         doc: 0x000c-0x0023
-      - id: number_of_bytes
+      - id: num_bytes
         type: s4
-      - id: number_of_entities
+      - id: num_entities
         type: s2
         doc: 0x0028-0x0029
       - id: drawing_first
