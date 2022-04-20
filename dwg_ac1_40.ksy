@@ -91,7 +91,7 @@ types:
       - id: cecolor
         type: s2
         doc: 0x00c6-0x00c7
-      - id: layers
+      - id: layer_colors
         type: s2
         repeat: expr
         repeat-expr: 128
@@ -101,7 +101,7 @@ types:
         doc: 0x01c8-0x01cf
       - id: unknown1
         type: f8
-        doc: 0x01d0-0x01d7
+        doc: 0x01d0-0x01d7, DIMSCALE?
         # r1_2 stops here
       - id: linear_units_format
         type: s2

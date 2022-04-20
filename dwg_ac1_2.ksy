@@ -83,7 +83,7 @@ types:
       - id: cecolor
         type: s2
         doc: 0x00c6-0x00c7
-      - id: layers
+      - id: layer_colors
         type: s2
         repeat: expr
         repeat-expr: 128
