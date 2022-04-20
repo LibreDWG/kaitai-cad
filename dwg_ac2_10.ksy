@@ -342,7 +342,7 @@ types:
         doc: 0x01fa-0x01fb, $LIMCHECK
       - id: unknown10a
         type: u1
-        doc: 0x01fc
+        doc: 0x01fc,
       - id: unknown10b
         type: u1
       - id: unknown10c

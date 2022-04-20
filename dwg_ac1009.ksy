@@ -181,16 +181,16 @@ types:
         type: s1
       - id: unknown_3
         type: s2
-        contents: 3
+        # contents: 3
       - id: num_sections
         type: u2
-        contents: 5
+        # contents: 5
       - id: num_header_vars
         type: u2
-        contents: 129
+        # contents: 129
       - id: dwg_version
         type: u1
-        contents: 0
+        # contents: 0
       - id: entities_start
         type: u4
       - id: entities_end
@@ -428,7 +428,7 @@ types:
         doc: 0x01fa-0x01fb, $LIMCHECK
       - id: unknown10a
         type: u1
-        doc: 0x01fc
+        doc: 0x01fc,
       - id: unknown10b
         type: u1
       - id: unknown10c

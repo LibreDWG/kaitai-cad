@@ -344,7 +344,7 @@ types:
         if: _parent.num_header_vars == 83
       - id: unknown10a
         type: u1
-        doc: 0x01fc
+        doc: 0x01fc,
         if: _parent.num_header_vars == 83
       - id: unknown10b
         type: u1
