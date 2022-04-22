@@ -181,14 +181,14 @@ types:
     seq:
       - id: layer
         type: s2
-      - id: size
+      - id: name_size
         type: s2
-      - id: value
-        size: size
-      - id: x
-        type: f8
-      - id: y
-        type: f8
+      - id: name
+        type: str
+        size: name_size
+        encoding: ASCII
+      - id: base_pt
+        type: point_2d
   entity_block_end:
     seq:
       - id: layer
@@ -197,16 +197,14 @@ types:
     seq:
       - id: layer
         type: s2
-      - id: size
+      - id: name_size
         type: s2
       - id: name
         type: str
-        size: size
+        size: name_size
         encoding: ASCII
-      - id: x
-        type: f8
-      - id: y
-        type: f8
+      - id: ins_pt
+        type: point_2d
       - id: x_scale
         type: f8
       - id: y_scale
@@ -217,32 +215,28 @@ types:
     seq:
       - id: layer
         type: s2
-      - id: x
-        type: f8
-      - id: y
-        type: f8
+      - id: center_pt
+        type: point_2d
       - id: radius
         type: f8
   entity_line:
     seq:
       - id: layer
         type: s2
-      - id: x1
-        type: f8
-      - id: y1
-        type: f8
-      - id: x2
-        type: f8
-      - id: y2
-        type: f8
+      - id: start_pt
+        type: point_2d
+      - id: end_pt
+        type: point_2d
   entity_load:
     seq:
       - id: layer
         type: s2
-      - id: size
+      - id: filename_size
         type: s2
-      - id: value
-        size: size
+      - id: filename
+        type: str
+        size: filename_size
+        encoding: ASCII
   entity_point:
     seq:
       - id: layer
@@ -271,10 +265,8 @@ types:
     seq:
       - id: layer
         type: s2
-      - id: x
-        type: f8
-      - id: y
-        type: f8
+      - id: ins_pt
+        type: point_2d
       - id: height
         type: f8
       - id: angle
@@ -285,58 +277,40 @@ types:
     seq:
       - id: layer
         type: s2
-      - id: from_x
-        type: f8
-      - id: from_y
-        type: f8
-      - id: from_and_x
-        type: f8
-      - id: from_and_y
-        type: f8
-      - id: to_x
-        type: f8
-      - id: to_y
-        type: f8
-      - id: to_and_x
-        type: f8
-      - id: to_and_y
-        type: f8
+      - id: corner1
+        type: point_2d
+      - id: corner2
+        type: point_2d
+      - id: corner3
+        type: point_2d
+      - id: corner4
+        type: point_2d
   entity_text:
     seq:
       - id: layer
         type: s2
-      - id: x
-        type: f8
-      - id: y
-        type: f8
+      - id: ins_pt
+        type: point_2d
       - id: height
         type: f8
       - id: angle
         type: f8
-      - id: size
+      - id: value_size
         type: s2
       - id: value
-        size: size
+        size: value_size
   entity_trace:
     seq:
       - id: layer
         type: s2
-      - id: from_x
-        type: f8
-      - id: from_y
-        type: f8
-      - id: from_and_x
-        type: f8
-      - id: from_and_y
-        type: f8
-      - id: to_x
-        type: f8
-      - id: to_y
-        type: f8
-      - id: to_and_x
-        type: f8
-      - id: to_and_y
-        type: f8
+      - id: corner1
+        type: point_2d
+      - id: corner2
+        type: point_2d
+      - id: corner3
+        type: point_2d
+      - id: corner4
+        type: point_2d
   point_2d:
     seq:
       - id: x
